@@ -54,7 +54,7 @@ $reservations = [
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Reserveringen Overzicht</h1>
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                Totaal: <?php echo count($reservations); ?>
+                Totaal: <?= count($reservations) ?>
             </span>
         </div>
 
@@ -75,21 +75,21 @@ $reservations = [
                 <?php foreach ($reservations as $res): ?>
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition duration-150">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium"><?php echo htmlspecialchars($res['name']); ?></span>
+                            <span class="font-medium"><?= htmlspecialchars($res['name']) ?></span>
                         </td>
                         <td class="py-3 px-6 text-left">
-                            <?php echo htmlspecialchars($res['email']); ?>
+                            <?= htmlspecialchars($res['email']) ?>
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <?php echo htmlspecialchars($res['phone']); ?>
+                            <?= htmlspecialchars($res['phone']) ?>
                         </td>
                         <td class="py-3 px-6 text-center">
                         <span class="bg-green-100 text-green-700 py-1 px-3 rounded-full text-xs">
-                            <?php echo htmlspecialchars($res['date']); ?>
+                            <?= htmlspecialchars($res['date']) ?>
                         </span>
                         </td>
                         <td class="py-3 px-6 text-left">
-                            <?php echo htmlspecialchars($res['location']); ?>
+                            <?= htmlspecialchars($res['location']) ?>
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
@@ -119,7 +119,7 @@ $reservations = [
         </div>
 
         <div class="mt-6 text-center text-gray-400 text-xs">
-            &copy; <?php echo date("Y"); ?> HOEX Fotografie
+            &copy; <?= dat("Y") ?> HOEX Fotografie
         </div>
     </section>
 </main>
