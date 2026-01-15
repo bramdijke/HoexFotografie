@@ -2,37 +2,37 @@
 $portfolioItems = [
         [
                 "title" => "Weddings",
-                "image" => "/images/wedding.webp",
+                "image" => "/HoexFotografie/images/wedding.webp",
                 "alt" => "Weddings",
                 "description" => "I document your wedding day with an eye for genuine emotions..."
         ],
         [
                 "title" => "Babies",
-                "image" => "/images/babies.webp",
+                "image" => "/HoexFotografie/images/babies.webp",
                 "alt" => "Babies",
                 "description" => "Baby photography focused on warmth, softness, and authenticity..."
         ],
         [
                 "title" => "Business",
-                "image" => "/images/business-people-in-the-office.webp",
+                "image" => "/HoexFotografie/images/business-people-in-the-office.webp",
                 "alt" => "Business",
                 "description" => "High-quality business portraits and brand photography..."
         ],
         [
                 "title" => "Art",
-                "image" => "/images/art.webp",
+                "image" => "/HoexFotografie/images/art.webp",
                 "alt" => "Art",
                 "description" => "Art photography focused on creativity, mood, and expression..."
         ],
         [
                 "title" => "Pets",
-                "image" => "/images/dogs.webp",
+                "image" => "/HoexFotografie/images/dogs.webp",
                 "alt" => "Dogs",
                 "description" => "Pet photography dedicated to capturing personality..."
         ],
         [
                 "title" => "Family",
-                "image" => "/images/family.webp",
+                "image" => "/HoexFotografie/images/family.webp",
                 "alt" => "Family",
                 "description" => "Family photography that celebrates authentic moments..."
         ]
@@ -52,9 +52,9 @@ $portfolioItems = [
     <nav class="sticky-top">
         <p>HOEX</p>
         <ul>
-            <li><a href="edit.php">Portfolio</a></li>
-            <li><a href="about.php">Reserveringen</a></li>
-            <li><a href="index.php">Over</a></li>
+            <li><a href="/HoexFotografie/index.php">Portfolio</a></li>
+            <li><a href="/HoexFotografie/admin/overview.php">Reserveringen</a></li>
+            <li><a href="/HoexFotografie/edit.php">Over</a></li>
         </ul>
     </nav>
 

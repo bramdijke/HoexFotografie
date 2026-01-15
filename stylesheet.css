@@ -149,3 +149,25 @@ ul {
 
 .scroll-btn.left { left: 8px; }
 .scroll-btn.right { right: 8px; }
+
+.edit-images ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.edit-images li{
+    width: 220px;
+}
+
+.edit-images img{
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+

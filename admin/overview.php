@@ -4,6 +4,7 @@ require_once "../includes/database.php";
 $query = "SELECT * FROM afspraken";
 $result = mysqli_query($db, $query);
 $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <!doctype html>
