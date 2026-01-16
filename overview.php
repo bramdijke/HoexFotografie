@@ -1,5 +1,5 @@
 <?php
-require_once "../includes/database.php";
+require_once "includes/database.php";
 
 $query = "SELECT * FROM afspraken";
 $result = mysqli_query($db, $query);

@@ -3,37 +3,37 @@ include 'includes/database.php';
 $portfolioItems =[
         [
                 "title" => "Weddings",
-                "image" => "/HoexFotografie/images/wedding.webp",
+                "image" => "./images/wedding.webp",
                 "alt" => "Weddings",
                 "description" => "I document your wedding day with an eye for genuine emotions..."
         ],
         [
                 "title" => "Babies",
-                "image" => "/HoexFotografie/images/babies.webp",
+                "image" => "./images/babies.webp",
                 "alt" => "Babies",
                 "description" => "Baby photography focused on warmth, softness, and authenticity..."
         ],
         [
                 "title" => "Business",
-                "image" => "/HoexFotografie/images/business-people-in-the-office.webp",
+                "image" => "./images/business-people-in-the-office.webp",
                 "alt" => "Business",
                 "description" => "High-quality business portraits and brand photography..."
         ],
         [
                 "title" => "Art",
-                "image" => "/HoexFotografie/images/art.webp",
+                "image" => "./images/art.webp",
                 "alt" => "Art",
                 "description" => "Art photography focused on creativity, mood, and expression..."
         ],
         [
                 "title" => "Pets",
-                "image" => "/HoexFotografie/images/dogs.webp",
+                "image" => "./images/dogs.webp",
                 "alt" => "Dogs",
                 "description" => "Pet photography dedicated to capturing personality..."
         ],
         [
                 "title" => "Family",
-                "image" => "/HoexFotografie/images/family.webp",
+                "image" => "./images/family.webp",
                 "alt" => "Family",
                 "description" => "Family photography that celebrates authentic moments..."
         ]
