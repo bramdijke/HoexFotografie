@@ -61,16 +61,14 @@ if (isset($_POST['Toevoegen'])) {
   <title>Document</title>
   <link rel="stylesheet" href="/HoexFotografie/stylesheet.css">
 </head>
-    <body>
-
-    <nav class="sticky-top">
-    <p>HOEX</p>
-    <ul>
-        <li><a href="/HoexFotografie/index.php"">Portfolio</a></li>
-        <li><a href="/HoexFotografie/admin/overview.php">Reserveringen</a></li>
-        <li><a href="/HoexFotografie/edit.php">Over</a></li>
-    </ul>
-    </nav>
+<body>
+        <nav class="sticky-top">
+            <p>HOEX</p>
+            <ul>
+                <li><a href="edit.php">Portfolio Bewerken</a></li>
+                <li><a href="overview.php">Reserveren]</a></li>
+            </ul>
+        </nav>
 
     <div class="header-container">
   <header>

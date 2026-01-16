@@ -1,50 +1,22 @@
 <?php
-$portfolioItems = [
-        [
-                "title" => "Weddings",
-                "image" => "./images/wedding.webp",
-                "alt" => "Weddings",
-                "description" => "I document your wedding day with an eye for genuine emotions..."
-        ],
-        [
-                "title" => "Babies",
-                "image" => "./images/babies.webp",
-                "alt" => "Babies",
-                "description" => "Baby photography focused on warmth, softness, and authenticity..."
-        ],
-        [
-                "title" => "Business",
-                "image" => "./images/business-people-in-the-office.webp",
-                "alt" => "Business",
-                "description" => "High-quality business portraits and brand photography..."
-        ],
-        [
-                "title" => "Art",
-                "image" => "./images/art.webp",
-                "alt" => "Art",
-                "description" => "Art photography focused on creativity, mood, and expression..."
-        ],
-        [
-                "title" => "Pets",
-                "image" => "./images/dogs.webp",
-                "alt" => "Dogs",
-                "description" => "Pet photography dedicated to capturing personality..."
-        ],
-        [
-                "title" => "Family",
-                "image" => "/HoexFotografie/images/family.webp",
-                "alt" => "Family",
-                "description" => "Family photography that celebrates authentic moments..."
-        ]
-];
-?>
 
+/** @var mysqli $db */
+
+require_once "includes/database.php";
+
+$query = "SELECT * FROM categorieën";
+
+$results = mysqli_query($db, $query);
+
+$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Page</title>
+    <title>HOEX</title>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
@@ -65,11 +37,11 @@ $portfolioItems = [
         <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>
 
         <ul class="portfolio" id="portfolioScroller">
-            <?php foreach ($portfolioItems as $item){ ?>
+            <?php foreach ($categories as $category){ ?>
                 <li class="portfolio-item">
-                    <img src="<?= $item['image']; ?>" alt="<?= $item['alt']; ?>">
-                    <h3><?= $item['title']; ?></h3>
-                    <p><?= $item['description']; ?></p>
+                    <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                    <h3><?= $category['name']; ?></h3>
+                    <p><?= $category['year']; ?></p>
                 </li>
             <?php } ?>
         </ul>
