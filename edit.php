@@ -38,6 +38,18 @@ $portfolioItems =[
                 "description" => "Family photography that celebrates authentic moments..."
         ]
 ];
+
+if (isset($_POST['Toevoegen'])) {
+    $title = $_POST['title'];
+    $image = $_POST['image'];
+    $alt = $_POST['alt'];
+    $description = $_POST['description'];
+
+    $stmt = $db->prepare("INSERT INTO portfolio (title, image, alt, description) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $title, $image, $alt, $description);
+    $stmt->execute();
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,26 +75,34 @@ $portfolioItems =[
     <div class="header-container">
   <header>
       <h1>Fotos bijwerken</h1>
-      <button>Toevoegen</button>
+      <form method="post" action="post">
+          <button>Toevoegen</button>
+        </form>
   </header >
     </div>
   <main>
+
       <div class="edit-images">
+          <ul>
+              <?php foreach ($portfolioItems as $item){ ?>
+                  <li class="portfolio-edit-item">
+                      <img src="<?= $item['image']; ?>" alt="<?= $item['alt']; ?>">
 
-              <ul >
-                  <?php foreach ($portfolioItems as $item){ ?>
-                      <li class="portfolio-item">
+                      <div class="info">
                           <h3><?= $item['title']; ?></h3>
-                          <img src="<?= $item['image']; ?>" alt="<?= $item['alt']; ?>">
-
                           <p><?= $item['description']; ?></p>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                      </li>
-                  <?php } ?>
-              </ul>
 
+                          <div class="actions">
+                              <a href="...">Edit</a>
+                              <a href="...">Delete</a>
+                          </div>
+                      </div>
+                  </li>
+              <?php } ?>
+          </ul>
       </div>
+
+
   </main>
 
   <footer>

@@ -152,22 +152,57 @@ ul {
 
 .edit-images ul{
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     display: flex;
-    gap: 20px;
     flex-direction: column;
+    gap: 20px;
 }
 
-.edit-images li{
-    width: 220px;
+/* DEZE moet row zijn zoals afbeelding 2 */
+.edit-images .portfolio-edit-item{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .edit-images img{
-    width: 100%;
-    height: 200px;
+    width: 160px;            /* zoals thumbnail */
+    height: 110px;           /* vaste hoogte = strakker */
     border-radius: 8px;
     object-fit: cover;
+    flex: 0 0 auto;
+}
+
+/* tekstblok rechts */
+.edit-images .info{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Edit/Delete naast elkaar (of maak column als je wil) */
+.edit-images .actions{
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.edit-images a{
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* FIX: geen spatie! */
+.edit-images a:hover{
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
 }
 
 
