@@ -63,11 +63,32 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
     const scroller = document.getElementById("portfolioScroller");
     const scrollAmount = 420;
 
+    scroller.innerHTML += scroller.innerHTML;
+
     document.querySelector(".scroll-btn.left").addEventListener("click", () => {
-        scroller.scrollBy({left: -scrollAmount, behavior: "smooth"});
+        if (scroller.scrollLeft === 0) {
+            scroller.scrollTo({
+                left: scroller.scrollWidth,
+                behavior: "smooth"
+            });
+        } else {
+            scroller.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        }
     });
 
     document.querySelector(".scroll-btn.right").addEventListener("click", () => {
-        scroller.scrollBy({left: scrollAmount, behavior: "smooth"});
+        if (scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth) {
+            scroller.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+            scroller.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
     });
+
+    scroller.addEventListener("scroll", () => {
+        if (scroller.scrollLeft >= scroller.scrollWidth / 2) {
+            scroller.scrollLeft = 0;
+        }
+    });
+
+
 </script>
