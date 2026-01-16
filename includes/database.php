@@ -2,7 +2,7 @@
 $host = '127.0.0.1';
 $username = 'root';
 $password = '';
-$database = 'hoexfotographie';
+$database = 'hoexfotografie';
 
 $db = mysqli_connect($host, $username, $password, $database);
 
