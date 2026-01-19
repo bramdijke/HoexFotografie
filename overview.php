@@ -14,9 +14,17 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Reserveringen Overzicht - HOEX Fotografie</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
-<body class="bg-gray-50 font-sans leading-normal tracking-normal">
 
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+<nav class="sticky-top">
+    <p>HOEX</p>
+    <ul>
+        <li><a href="portfolio-bewerken.php">Portfolio bewerken</a></li>
+        <li><a href="overview.php">Reserveringen</a></li>
+    </ul>
+</nav>
 <main class="container mx-auto py-10 px-4">
     <section class="bg-white p-6 rounded-lg shadow-lg">
 
