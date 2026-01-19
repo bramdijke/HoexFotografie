@@ -1,5 +1,5 @@
 <?php
-require_once "includes/database.php";
+require_once "../../includes/database.php";
 
 $query = "SELECT * FROM afspraken";
 $result = mysqli_query($db, $query);
@@ -12,8 +12,9 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>Reserveringen Overzicht - HOEX Fotografie</title>
+    <link href="../../styles/output.css" rel="stylesheet">
+
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal">
 
@@ -74,9 +75,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 <?= htmlspecialchars($res['locatie']) ?>
                             </td>
                             <td class="py-3 px-4 text-left">
-                                <span class="bg-gray-100 text-gray-700 py-1 px-2 rounded text-xs uppercase font-semibold">
-                                    <?= htmlspecialchars($res['soort_opdracht']) ?>
-                                </span>
+                                <?= htmlspecialchars($res['soort_opdracht']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
                                 <?php if (!empty($res['inspiratie_bestand'])): ?>

@@ -14,7 +14,7 @@
 
 </header>
 <main>
-    <h1><a href="overview.php">Reserveringen</a></h1>
+    <h1><a href="admin/overview/overview.php">Reserveringen</a></h1>
     <h1><a href="edit.php">Portfolio Beheren</a></h1>
 </main>
 </body>
