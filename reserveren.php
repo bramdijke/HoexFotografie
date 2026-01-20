@@ -23,11 +23,8 @@
     <h1>Maak een Afspraak</h1>
 
     <form>
-        <label for="first-name">Voornaam</label>
-        <input type="text" name="first-name" id="first-name" placeholder="Voorrnaam" required/>
-
-        <label for="last-name">Achternaam</label>
-        <input type="text" name="last-name" id="last-name" placeholder="Achternaam" required/>
+        <label for="first-name">Naam</label>
+        <input type="text" name="name" id="name" placeholder="Naam" required/>
 
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" placeholder="E-mail" required/>
