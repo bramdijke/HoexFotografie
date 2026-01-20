@@ -127,18 +127,14 @@ if (!$res) {
             </div>
 
             <div>
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Soort
-                    Opdracht</label>
-                <select name="soort_opdracht"
-                        class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none bg-white">
-                    <option value="Portret" <?= $res['soort_opdracht'] == 'Portret' ? 'selected' : '' ?>>Portret
-                    </option>
-                    <option value="Bruiloft" <?= $res['soort_opdracht'] == 'Bruiloft' ? 'selected' : '' ?>>Bruiloft
-                    </option>
-                    <option value="Zakelijk" <?= $res['soort_opdracht'] == 'Zakelijk' ? 'selected' : '' ?>>Zakelijk
-                    </option>
-                    <option value="Anders" <?= $res['soort_opdracht'] == 'Anders' ? 'selected' : '' ?>>Anders</option>
-                </select>
+                <label class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">
+                    Soort Opdracht
+                </label>
+                <input type="text"
+                       name="soort_opdracht"
+                       value="<?= htmlspecialchars($res['soort_opdracht']) ?>"
+                       placeholder="Bijv. Portret, Bruiloft in het bos, etc."
+                       class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
             </div>
 
             <div class="pt-4">

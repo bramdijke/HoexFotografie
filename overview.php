@@ -12,18 +12,38 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>Reserveringen Overzicht - HOEX Fotografie</title>
-    <link rel="stylesheet" href="stylesheet.css">
-</head>
+    <link href="styles/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
+</head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal">
-<nav class="sticky-top">
-    <p>HOEX</p>
-    <ul>
-        <li><a href="portfolio-bewerken.php">Portfolio bewerken</a></li>
-        <li><a href="overview.php">Reserveringen</a></li>
-    </ul>
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+
+        <div class="flex items-center">
+            <a href="index.php" class="flex items-center">
+                <img src="images/hoexfotografie-logo.png"
+                     alt="hoexfotografie logo"
+                     class="h-10 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
+            </a>
+        </div>
+
+        <ul class="flex items-center space-x-6">
+            <li>
+                <a href="portfolio-bewerken.php"
+                   class="text-black font-medium transition duration-300 text-sm">
+                    Portfolio bewerken
+                </a>
+            </li>
+            <li>
+                <a href="overview.php"
+                   class="text-black font-semibold pb-1 text-sm">
+                    Reserveringen
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
 <main class="container mx-auto py-10 px-4">
     <section class="bg-white p-6 rounded-lg shadow-lg">
@@ -71,9 +91,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 <?= htmlspecialchars($res['telefoonnummer']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <span class="bg-green-100 text-green-700 py-1 px-3 rounded-full text-xs">
-                                    <?= htmlspecialchars($res['datum_afspraak']) ?>
-                                </span>
+                                <?= htmlspecialchars($res['datum_afspraak']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
                                 <?= htmlspecialchars($res['datum_opdracht']) ?>
@@ -82,9 +100,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                 <?= htmlspecialchars($res['locatie']) ?>
                             </td>
                             <td class="py-3 px-4 text-left">
-                                <span class="bg-gray-100 text-gray-700 py-1 px-2 rounded text-xs uppercase font-semibold">
-                                    <?= htmlspecialchars($res['soort_opdracht']) ?>
-                                </span>
+                                <?= htmlspecialchars($res['soort_opdracht']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
                                 <?php if (!empty($res['inspiratie_bestand'])): ?>
@@ -128,6 +144,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </tbody>
             </table>
         </div>
+
         <div class="mt-6 text-center text-gray-400 text-xs">
             &copy; <?= date("Y") ?> HOEX Fotografie
         </div>
