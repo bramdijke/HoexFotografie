@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+    /* This defines your brand colors so the CLI recognizes them */
+    --color-shadow-grey: #282727;
+    --color-dark-grey: #595959;
+}

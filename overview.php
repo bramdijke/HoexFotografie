@@ -128,7 +128,6 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </tbody>
             </table>
         </div>
-
         <div class="mt-6 text-center text-gray-400 text-xs">
             &copy; <?= date("Y") ?> HOEX Fotografie
         </div>
