@@ -29,7 +29,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </a>
         </div>
 
-        <ul class="flex items-center space-x-8">
+        <ul class="flex items-center space-x-6">
             <li>
                 <a href="portfolio-bewerken.php"
                    class="text-black font-medium transition duration-300 text-sm">
