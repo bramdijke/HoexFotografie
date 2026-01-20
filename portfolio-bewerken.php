@@ -20,19 +20,31 @@ if (isset($_POST['submit'])) {
 
     $name = mysqli_escape_string($db, $_POST['name']);
     $year = mysqli_escape_string($db, $_POST['year']);
-    $cover = addImageFile($_FILES['cover']);
 
-    $query = "INSERT INTO categorieën (name, year, cover) VALUES ('$name', '$year', '$cover')";
-    $result = mysqli_query($db, $query);
+    if ($year < 1901 || $year > 2100) {
+        echo "Jaartal moet tussen 1901 en 2100";
+    } else {
+        $cover = addImageFile($_FILES['cover']);
 
-    mysqli_close($db);
+        $query = "INSERT INTO categorieën (name, year, cover) VALUES ('$name', '$year', '$cover')";
+        $result = mysqli_query($db, $query);
 
-    header("location: portfolio-bewerken.php");
+        mysqli_close($db);
 
-    exit;
+        header("location: portfolio-bewerken.php");
+
+        exit;
+        }
+
 }
 
 if (isset($_POST['delete'])) {
+    $cover = $_POST['cover'];
+
+    if (file_exists("images/$cover")) {
+        unlink("images/$cover");
+    }
+
     $categorie_id = mysqli_escape_string($db, $_POST['categorie_id']);
 
     $query = "DELETE FROM categorieën WHERE categorie_id = '$categorie_id'";
@@ -81,6 +93,8 @@ if (isset($_POST['delete'])) {
 
                 <label for="year">Jaar</label>
                 <input type="number" id="year" name="year">
+                <span class="has-text-danger"></span>
+
 
                 <label for="cover">Cover foto</label>
                 <input type="file" name="cover" id="cover">
@@ -98,8 +112,9 @@ if (isset($_POST['delete'])) {
                     <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
-                    <form method="post" action="">
+                    <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
                         <input type="hidden" name="categorie_id" value="<?= $category['categorie_id'] ?>"/>
+                        <input type="hidden" name="cover" value="<?= $category['cover'] ?>"/>
                         <button type="submit" name="delete">Map verwijderen</button>
                     </form>
                 </li>

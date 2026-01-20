@@ -1,5 +1,5 @@
 <?php
-require_once "../../includes/database.php";
+require_once "includes/database.php";
 
 // Check if ID is present
 if (!isset($_GET['id']) || empty($_GET['id'])) {
