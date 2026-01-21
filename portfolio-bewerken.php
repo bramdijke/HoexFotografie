@@ -75,7 +75,7 @@ if (isset($_POST['delete'])) {
         </ul>
     </nav>
     <header>
-        <a href="edit.php"> Edit.php</a>
+        <!--<a href="edit.php"> Edit.php</a>-->
         <h1>Portfolio Beheren</h1>
     </header>
 
