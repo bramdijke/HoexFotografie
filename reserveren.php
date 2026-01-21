@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <title>Maak een Afspraak - HOEX Fotografie</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -24,6 +25,10 @@
             color: #666666;
         }
     </style>
+=======
+    <title>Edit Page</title>
+    <link rel="stylesheet" href="styles/stylesheet.css">
+>>>>>>> Stashed changes
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal text-shadow-grey">
 
