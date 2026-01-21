@@ -65,6 +65,7 @@ if (isset($_POST['delete'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOEX</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
+
 </head>
 <body>
     <nav class="sticky-top">
@@ -109,7 +110,7 @@ if (isset($_POST['delete'])) {
         <ul class="portfolio" id="portfolioScroller">
             <?php foreach ($categories as $category){ ?>
                 <li class="portfolio-item">
-                    <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                    <a href="categorie.php" ><img src="images<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
                     <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
@@ -126,9 +127,10 @@ if (isset($_POST['delete'])) {
         <button class="scroll-btn right" type="button" aria-label="Scroll right">›</button>
     </div>
 </main>
-<footer>
-    <p>&copy; 2024 My Website</p>
-</footer>
+    <footer class="site-footer">
+        <p>© 2024 Hoex Fotografie. All rights reserved.</p>
+
+    </footer>
 
 </body>
 </html>

@@ -18,6 +18,9 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOEX</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
 <header>
@@ -39,7 +42,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
         <ul class="portfolio" id="portfolioScroller">
             <?php foreach ($categories as $category){ ?>
                 <li class="portfolio-item">
-                    <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                    <a href="categorie.php" > <img src="HoexFotografie/images<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
                 </li>
@@ -52,8 +55,22 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
     </div>
 
 </main>
-<footer>
-    <p>&copy; 2024 My Website</p>
+<footer class="site-footer">
+    <p>© 2024 Hoex Fotografie. All rights reserved.</p>
+
+    <div class="footer-social">
+        <a href="https://instagram.com/yourname" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://facebook.com/yourname" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+
+        <a href="https://tiktok.com/@yourname" target="_blank" rel="noopener" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+    </div>
 </footer>
 
 </body>
