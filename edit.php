@@ -59,7 +59,7 @@ if (isset($_POST['Toevoegen'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Document</title>
-  <link rel="stylesheet" href="/HoexFotografie/stylesheet.css">
+  <link rel="stylesheet" href="/HoexFotografie/styles/stylesheet.css">
 </head>
 <body>
         <nav class="sticky-top">

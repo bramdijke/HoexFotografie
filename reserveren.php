@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
     <title>Maak een Afspraak - HOEX Fotografie</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -120,6 +121,21 @@
         </footer>
     </section>
 </main>
+=======
+    <title>Edit Page</title>
+    <link rel="stylesheet" href="styles/stylesheet.css">
+</head>
+
+<header>
+    <nav class="sticky-top">
+        <p>HOEX</p>
+        <ul>
+            <li><a href="portfolio.php">Portfolio</a></li>
+            <li><a href="reserveren.php">Reserveren</a></li>
+            <li><a href="about.php">Over</a></li>
+        </ul>
+    </nav>
+>>>>>>> Stashed changes
 
 </body>
 </html>
