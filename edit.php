@@ -1,44 +1,11 @@
 <?php
 include 'includes/database.php';
-$portfolioItems =[
-        [
-                "title" => "Weddings",
-                "images" => "/images/wedding.webp",
-                "alt" => "Weddings",
-                "description" => "I document your wedding day with an eye for genuine emotions..."
-        ],
-        [
-                "title" => "Babies",
-                "images" => "/images/babies.webp",
-                "alt" => "Babies",
-                "description" => "Baby photography focused on warmth, softness, and authenticity..."
-        ],
-        [
-                "title" => "Business",
-                "images" => "/images/business-people-in-the-office.webp",
-                "alt" => "Business",
-                "description" => "High-quality business portraits and brand photography..."
-        ],
-        [
-                "title" => "Art",
-                "images" => "/images/art.webp",
-                "alt" => "Art",
-                "description" => "Art photography focused on creativity, mood, and expression..."
-        ],
-        [
-                "title" => "Pets",
-                "images" => "/images/dogs.webp",
-                "alt" => "Dogs",
-                "description" => "Pet photography dedicated to capturing personality..."
-        ],
-        [
-                "title" => "Family",
-                "images" => "/images/family.webp",
-                "alt" => "Family",
-                "description" => "Family photography that celebrates authentic moments..."
-        ]
-];
 
+$query = "SELECT * FROM categorieën";
+
+$results = mysqli_query($db, $query);
+
+$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 /*if (isset($_POST['Toevoegen'])) {
     $title = $_POST['title'];
     $image = $_POST['image'];
@@ -81,21 +48,16 @@ $portfolioItems =[
   <main>
 
       <div class="edit-images">
-          <ul>
-              <?php foreach ($portfolioItems as $item){ ?>
-                  <li class="portfolio-edit-item">
-                      <img src="<?= $item['images']; ?>" alt="<?= $item['alt']; ?>">
-
-                      <div class="info">
-                          <h3><?= $item['title']; ?></h3>
-                          <p><?= $item['description']; ?></p>
-
-                          <div class="actions">
-                              <a href="...">Delete</a>
-                          </div>
-                      </div>
+          <ul class="portfolio" id="portfolioScroller">
+              <?php foreach ($categories as $category){ ?>
+                  <li class="portfolio-item">
+                      <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                      <h3><?= $category['name']; ?></h3>
+                      <p><?= $category['year']; ?></p>
+                      <button>Delete</button>
                   </li>
               <?php } ?>
+
           </ul>
       </div>
 

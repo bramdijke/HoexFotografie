@@ -1,3 +1,18 @@
+<?php
+include "includes/database.php";
+
+/*Add button en delete button op gekozen categorie*/
+/*for each afbeelding een verwijder button en toevoegen*/
+//op to
+
+$categorie_id = mysqli_escape_string($db, $_GET['categorie_id']);
+$query = "SELECT * FROM categorieën where categorie_id = '$categorie_id'";
+$results = mysqli_query($db, $query);
+$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,5 +31,9 @@
         </ul>
     </nav>
 </header>
+<main>
+    <h1>Bewerken</h1>
+
+</main>
 </body>
 </html>

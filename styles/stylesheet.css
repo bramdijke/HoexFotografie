@@ -177,11 +177,10 @@ ul {
 }
 
 .edit-images img{
-    width: 160px;            /* zoals thumbnail */
-    height: 110px;           /* vaste hoogte = strakker */
+    width: 300px;            /* zoals thumbnail */
+    height: 300px;           /* vaste hoogte = strakker */
     border-radius: 8px;
     object-fit: cover;
-    flex: 0 0 auto;
 }
 
 /* tekstblok rechts */
@@ -197,6 +196,18 @@ ul {
     gap: 12px;
     margin-top: 6px;
 }
+.edit-images button {
+    height: 40px;
+    width:150px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+}
 
 .edit-images a{
     font-size: 16px;
@@ -209,7 +220,7 @@ ul {
 
 /* FIX: geen spatie! */
 .edit-images a:hover{
-    background-color: #0056b3;
+   /* background-color: #0056b3;*/
     color: white;
     text-decoration: none;
 }

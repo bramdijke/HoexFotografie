@@ -110,7 +110,7 @@ if (isset($_POST['delete'])) {
         <ul class="portfolio" id="portfolioScroller">
             <?php foreach ($categories as $category){ ?>
                 <li class="portfolio-item">
-                    <a href="categorie.php" ><img src="images<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                    <a href="categorie.php" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
                     <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
