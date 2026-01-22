@@ -19,37 +19,39 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal">
 <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-2 flex justify-between items-center">
-
-        <div class="flex items-center">
-            <a href="index.php" class="flex items-center">
-                <img src="images/hoexfotografie-logo.png"
-                     alt="hoexfotografie logo"
-                     class="h-10 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
-            </a>
-        </div>
+    <div class="container mx-auto px-6 py-1 grid grid-cols-3 items-center">
 
         <ul class="flex items-center space-x-6">
             <li>
                 <a href="portfolio-bewerken.php"
-                   class="text-black font-medium transition duration-300 text-sm">
+                   class="text-black font-medium hover:text-gray-600 transition duration-300 text-m">
                     Portfolio bewerken
                 </a>
             </li>
             <li>
-                <a href="overview.php"
-                   class="text-black font-semibold pb-1 text-sm">
+                <a href="overview.php" class="text-black font-semibold pb-1 text-m">
                     Reserveringen
                 </a>
             </li>
         </ul>
+
+        <div class="flex justify-center">
+            <a href="index.php" class="flex items-center">
+                <img src="images/hoexfotografie-logo.png"
+                     alt="hoexfotografie logo"
+                     class="h-14 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
+            </a>
+        </div>
+
+        <div class="flex justify-end"></div>
+
     </div>
 </nav>
 <main class="container mx-auto py-10 px-4">
     <section class="bg-white p-6 rounded-lg shadow-lg">
 
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Reserveringen Overzicht</h1>
+            <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">RESERVERINGEN OVERZICHT</h1>
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
                 Totaal: <?= count($reservations) ?>
             </span>

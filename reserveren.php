@@ -14,38 +14,31 @@
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal text-shadow-grey">
 
-<nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-2 grid grid-cols-3 items-center">
-
-        <ul class="flex items-center space-x-6">
-            <li>
-                <a href="portfolio.php"
-                   class="text-black font-medium hover:text-gray-600 transition duration-300 text-sm">
-                    Portfolio
-                </a>
+<nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-2 flex flex-col md:grid md:grid-cols-3 items-center gap-4 md:gap-0">
+        <ul class="flex items-center space-x-6 md:space-x-8 order-2 md:order-1">
+            <li><a href="portfolio.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Portfolio</a>
             </li>
-            <li>
-                <a href="reserveren.php" class="text-black font-semibold pb-1 text-sm">
-                    Reserveren
-                </a>
+            <li><a href="reserveren.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Reserveren</a>
             </li>
-            <li>
-                <a href="about.php" class="text-black font-semibold pb-1 text-sm">
-                    About
-                </a>
+            <li><a href="about.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">About</a>
             </li>
         </ul>
 
-        <div class="flex justify-center">
+        <div class="flex justify-center order-1 md:order-2">
             <a href="index.php" class="flex items-center">
-                <img src="images/hoexfotografie-logo.png"
-                     alt="hoexfotografie logo"
-                     class="h-10 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
+                <img src="images/hoexfotografie-logo.png" alt="hoex logo" class="h-10 md:h-14 w-auto object-contain">
             </a>
         </div>
 
-        <div class="flex justify-end"></div>
-
+        <div class="hidden md:flex justify-end order-3">
+            <div class="flex space-x-4 text-gray-500">
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+            </div>
+        </div>
     </div>
 </nav>
 <main class="container mx-auto py-10 px-4">
