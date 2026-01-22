@@ -102,7 +102,7 @@
                     <label for="deadline"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
                         deadline</label>
-                    <input type="date" id="deadline" name="deadline" required
+                    <input type="datetime-local" id="deadline" name="deadline" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
                 <div>
