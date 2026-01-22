@@ -1,3 +1,8 @@
+<?php
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,10 +95,24 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="date_1"
+                    <label for="appointment"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
-                        Opdracht</label>
-                    <input type="datetime-local" id="date_1" name="date_1" required
+                        afspraak</label>
+                    <input type="date" id="appointment" name="appointment" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
+                </div>
+                <div>
+                    <label for="job"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
+                        klus</label>
+                    <input type="datetime-local" id="job" name="job" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
+                </div>
+                <div>
+                    <label for="deadline"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
+                        deadline</label>
+                    <input type="date" id="deadline" name="deadline" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
                 <div>
@@ -112,7 +131,13 @@
                           class="w-full border resize-none
  border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none"></textarea>
             </div>
+           <div>
+            <input type="radio" id="zakelijk" name="option" value="zakelijk" />
+            <label for="zakelijk">zakelijk</label>
 
+            <input type="radio" id="particulier" name="option" value="particulier" />
+            <label for="particulier">particulier</label>
+           </div>
             <div class="pt-4">
                 <button type="submit"
                         class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-shadow-grey">
