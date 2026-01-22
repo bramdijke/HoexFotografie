@@ -20,13 +20,13 @@ if (!$categorie) {
     die("Categorie niet gevonden.");
 }
 
-$foto_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+/*$foto_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $stmt = $db->prepare("SELECT id, categorie, image FROM foto's WHERE id = ?");
 $stmt->bind_param("i", $foto_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $foto = $result->fetch_assoc();
-?>
+*/?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
