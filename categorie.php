@@ -11,10 +11,17 @@
     <nav class="sticky-top">
         <p>HOEX</p>
         <ul>
-            <li><a href="portfolio-bewerken.php">Portfolio bewerken</a></li>
-            <li><a href="overview.php">Reserveringen</a></li>
+            <li><a href="portfolio.php">Portfolio</a></li>
+            <li><a href="reserveren.php">Reserveren</a></li>
+            <li><a href="about.php">Over</a></li>
         </ul>
     </nav>
 </header>
+<main>
+    <form method="post" action="" enctype="multipart/form-data">
+        <input type="file" name="foto">
+        <button type="submit" name="add">Foto toevoegen</button>
+    </form>
+</main>
 </body>
 </html>
