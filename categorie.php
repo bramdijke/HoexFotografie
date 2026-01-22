@@ -1,38 +1,44 @@
 <?php
 require_once "includes/database.php";
 
-// 1) Read categorie_id safely from the URL
-$categorie_id = filter_input(INPUT_GET, 'categorie_id', FILTER_VALIDATE_INT);
-
-if (!$categorie_id) {
-    // If someone visits categorie.php without an id
+// 1) Read category_id from URL
+$category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
+if (!$category_id) {
     die("Geen geldige categorie gekozen.");
 }
 
-/*Fetch the category from the database using a prepared statement*/
-$stmt = $db->prepare("SELECT categorie_id, name, year, cover FROM categorieën WHERE categorie_id = ?");
-$stmt->bind_param("i", $categorie_id);
+// 2) Fetch category
+$stmt = $db->prepare("SELECT category_id, name, year, cover FROM categories WHERE category_id = ?");
+$stmt->bind_param("i", $category_id);
 $stmt->execute();
-$result = $stmt->get_result();
-$categorie = $result->fetch_assoc();
+$stmt->bind_result($cid, $cname, $cyear, $ccover);
 
-if (!$categorie) {
+if (!$stmt->fetch()) {
     die("Categorie niet gevonden.");
 }
+$stmt->close();
 
-/*$foto_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$stmt = $db->prepare("SELECT id, categorie, image FROM foto's WHERE id = ?");
-$stmt->bind_param("i", $foto_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$foto = $result->fetch_assoc();
-*/?>
+// 3) Fetch photos for this category
+$fotos = [];
+$stmtFotos = $db->prepare("SELECT id, image FROM photos WHERE category_id = ? ORDER BY id DESC");
+$stmtFotos->bind_param("i", $category_id);
+$stmtFotos->execute();
+$stmtFotos->bind_result($foto_id, $foto_image);
+
+while ($stmtFotos->fetch()) {
+    $fotos[] = [
+            'id' => $foto_id,
+            'image' => $foto_image
+    ];
+}
+$stmtFotos->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($categorie['name']) ?> bewerken</title>
+    <title><?= htmlspecialchars($cname) ?> bewerken</title>
     <link rel="stylesheet" href="styles/stylesheet.css">
 </head>
 <body>
@@ -47,24 +53,32 @@ $foto = $result->fetch_assoc();
 </header>
 
 <main>
-    <h1><?= htmlspecialchars($categorie['name']) ?> bewerken</h1>
-    <p>Jaar: <?= htmlspecialchars($categorie['year']) ?></p>
+    <h1><?= htmlspecialchars($cname) ?> bewerken</h1>
+    <p>Jaar: <?= htmlspecialchars($cyear) ?></p>
 
     <img
-            src="images/<?= htmlspecialchars($categorie['cover']) ?>"
-            alt="Cover foto van <?= htmlspecialchars($categorie['name']) ?>"
+            src="images/<?= htmlspecialchars($ccover) ?>"
+            alt="Cover foto van <?= htmlspecialchars($cname) ?>"
             style="max-width: 400px; height: 400px;"
     >
 
-    <button>
-        Foto verwijderen
-    </button>
+    <h2>Foto’s in <?= htmlspecialchars($cname) ?></h2>
 
-    <button>
-        Foto's toevoegen
-    </button>
-
-
+    <?php if (empty($fotos)): ?>
+        <p>Deze categorie heeft nog geen foto’s.</p>
+    <?php else: ?>
+        <div class="foto-grid">
+            <?php foreach ($fotos as $foto): ?>
+                <div class="foto-item">
+                    <img
+                            src="images/<?= htmlspecialchars($foto['image']) ?>"
+                            alt="Foto <?= htmlspecialchars($foto['id']) ?>"
+                            style="width: 250px; height: 250px; object-fit: cover;"
+                    >
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </main>
 </body>
 </html>

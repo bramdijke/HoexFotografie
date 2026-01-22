@@ -9,7 +9,7 @@ Why not start by checking out our portfolio or make a reservation today?
 
 require_once "includes/database.php";
 
-$query = "SELECT * FROM categorieën";
+$query = "SELECT * FROM categories";
 
 $results = mysqli_query($db, $query);
 
