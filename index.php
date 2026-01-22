@@ -51,8 +51,8 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
         <?= $intro; ?>
     </p>
 
- <!--   <div class="portfolio-wrap">
-        <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>-->
+    <div class="portfolio-wrap">
+        <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>
 
         <ul class="portfolio" id="portfolioScroller">
             <?php foreach ($categories as $category){ ?>
@@ -66,8 +66,8 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
 
 
-<!--        <button class="scroll-btn right" type="button" aria-label="Scroll right">›</button>
-    </div>-->
+        <button class="scroll-btn right" type="button" aria-label="Scroll right">›</button>
+    </div>
 </main>
     <footer class="site-footer">
         <p>© 2024 Hoex Fotografie. All rights reserved.</p>

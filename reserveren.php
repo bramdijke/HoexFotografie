@@ -8,56 +8,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <title>Maak een Afspraak - HOEX Fotografie</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Adding the custom color from your reference if not defined in tailwind config */
-        .text-shadow-grey {
-            color: #333333;
-        }
-
-        .border-shadow-grey {
-            border-color: #333333;
-        }
-
-        .bg-shadow-grey {
-            background-color: #333333;
-        }
-
-        .text-dark-grey {
-            color: #666666;
-        }
-    </style>
-=======
     <title>Edit Page</title>
-    <link rel="stylesheet" href="styles/stylesheet.css">
->>>>>>> Stashed changes
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal text-shadow-grey">
 
 <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-2 flex justify-between items-center">
-        <div class="flex items-center">
+    <div class="container mx-auto px-6 py-2 grid grid-cols-3 items-center">
+
+        <ul class="flex items-center space-x-6">
+            <li>
+                <a href="portfolio.php"
+                   class="text-black font-medium hover:text-gray-600 transition duration-300 text-sm">
+                    Portfolio
+                </a>
+            </li>
+            <li>
+                <a href="reserveren.php" class="text-black font-semibold pb-1 text-sm">
+                    Reserveren
+                </a>
+            </li>
+            <li>
+                <a href="about.php" class="text-black font-semibold pb-1 text-sm">
+                    About
+                </a>
+            </li>
+        </ul>
+
+        <div class="flex justify-center">
             <a href="index.php" class="flex items-center">
                 <img src="images/hoexfotografie-logo.png"
                      alt="hoexfotografie logo"
                      class="h-10 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
             </a>
         </div>
-        <ul class="flex items-center space-x-6">
-            <li>
-                <a href="portfolio-bewerken.php" class="text-black font-medium transition duration-300 text-sm">Portfolio
-                    bewerken</a>
-            </li>
-            <li>
-                <a href="overview.php" class="text-black font-semibold pb-1 text-sm">Reserveringen</a>
-            </li>
-        </ul>
+
+        <div class="flex justify-end"></div>
+
     </div>
 </nav>
-
 <main class="container mx-auto py-10 px-4">
     <section class="max-w-2xl mx-auto bg-white p-8 rounded shadow-xl border-t-4 border-shadow-grey">
 
@@ -151,20 +141,5 @@
         </footer>
     </section>
 </main>
-=======
-    <title>Edit Page</title>
-    <link rel="stylesheet" href="styles/stylesheet.css">
-</head>
-
-<header>
-    <nav class="sticky-top">
-        <p>HOEX</p>
-        <ul>
-            <li><a href="portfolio.php">Portfolio</a></li>
-            <li><a href="reserveren.php">Reserveren</a></li>
-            <li><a href="about.php">Over</a></li>
-        </ul>
-    </nav>
->>>>>>> Stashed changes
 </body>
 </html>

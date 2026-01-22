@@ -1,25 +1,39 @@
 <?php
-include "includes/database.php";
+require_once "includes/database.php";
 
-/*Add button en delete button op gekozen categorie*/
-/*for each afbeelding een verwijder button en toevoegen*/
-//op to
+// 1) Read categorie_id safely from the URL
+$categorie_id = filter_input(INPUT_GET, 'categorie_id', FILTER_VALIDATE_INT);
 
-$categorie_id = mysqli_escape_string($db, $_GET['categorie_id']);
-$query = "SELECT * FROM categorieën where categorie_id = '$categorie_id'";
-$results = mysqli_query($db, $query);
-$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
+if (!$categorie_id) {
+    // If someone visits categorie.php without an id
+    die("Geen geldige categorie gekozen.");
+}
 
-?>
+/*Fetch the category from the database using a prepared statement*/
+$stmt = $db->prepare("SELECT categorie_id, name, year, cover FROM categorieën WHERE categorie_id = ?");
+$stmt->bind_param("i", $categorie_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$categorie = $result->fetch_assoc();
 
+if (!$categorie) {
+    die("Categorie niet gevonden.");
+}
 
+/*$foto_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$stmt = $db->prepare("SELECT id, categorie, image FROM foto's WHERE id = ?");
+$stmt->bind_param("i", $foto_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$foto = $result->fetch_assoc();
+*/?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Page</title>
-    <link rel="stylesheet" href="stylesheet.css">
+    <title><?= htmlspecialchars($categorie['name']) ?> bewerken</title>
+    <link rel="stylesheet" href="styles/stylesheet.css">
 </head>
 <body>
 <header>
@@ -31,8 +45,25 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
         </ul>
     </nav>
 </header>
+
 <main>
-    <h1>Bewerken</h1>
+    <h1><?= htmlspecialchars($categorie['name']) ?> bewerken</h1>
+    <p>Jaar: <?= htmlspecialchars($categorie['year']) ?></p>
+
+    <img
+            src="images/<?= htmlspecialchars($categorie['cover']) ?>"
+            alt="Cover foto van <?= htmlspecialchars($categorie['name']) ?>"
+            style="max-width: 400px; height: 400px;"
+    >
+
+    <button>
+        Foto verwijderen
+    </button>
+
+    <button>
+        Foto's toevoegen
+    </button>
+
 
 </main>
 </body>
