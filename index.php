@@ -4,7 +4,7 @@ $intro = "Hi there! Welcome to the Hoex Fotografie website. Here you can explore
 
 /** @var mysqli $db */
 // Added LIMIT 3 to the query to only fetch the first three categories
-$query = "SELECT * FROM categorieën LIMIT 3";
+$query = "SELECT * FROM categories LIMIT 3";
 $results = mysqli_query($db, $query);
 $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>

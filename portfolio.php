@@ -1,7 +1,7 @@
 <?php
 /** @var mysqli $db */
 require_once "includes/database.php";
-$query = "SELECT * FROM categorieën";
+$query = "SELECT * FROM categories";
 $results = mysqli_query($db, $query);
 $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 ?>
