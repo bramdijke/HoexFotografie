@@ -116,7 +116,7 @@ if (isset($_POST['delete'])) {
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
                     <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
-                        <input type="hidden" name="categorie_id" value="<?= $category['categorie_id'] ?>"/>
+                        <input type="hidden" name="category_id" value="<?= $category['category_id'] ?>"/>
                         <input type="hidden" name="cover" value="<?= $category['cover'] ?>"/>
                         <button type="submit" name="delete">Map verwijderen</button>
                     </form>
