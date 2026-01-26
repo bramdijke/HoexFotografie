@@ -88,21 +88,38 @@ require_once "includes/database.php";
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="appointment"
+<<<<<<< Updated upstream
                            class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
                         afspraak</label>
+=======
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Afspraak
+                           Datum
+</label>
+>>>>>>> Stashed changes
                     <input type="date" id="appointment" name="appointment" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
                 <div>
+<<<<<<< Updated upstream
                     <label for="job" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
                         klus</label>
+=======
+                    <label for="job"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Opdracht Datum
+                        </label>
+>>>>>>> Stashed changes
                     <input type="datetime-local" id="job" name="job" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
                 <div>
                     <label for="deadline"
+<<<<<<< Updated upstream
                            class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
                         deadline</label>
+=======
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2"> Opleverdatum
+                        </label>
+>>>>>>> Stashed changes
                     <input type="datetime-local" id="deadline" name="deadline" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
