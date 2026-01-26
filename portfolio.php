@@ -2,7 +2,7 @@
 
 /** @var mysqli $db */
 
-require_once "includes/database.php";
+require_once 'includes/database.php';
 $query = "SELECT * FROM categories";
 $results = mysqli_query($db, $query);
 
@@ -40,18 +40,6 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
                        class="text-black font-medium hover:text-gray-600 transition duration-300 text-m">
                         Portfolio
                     </a>
-</header>
-<main>
-    <h1>Portfolio</h1>
-    <div class="portfolio-wrap">
-        <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>
-
-        <ul class="portfolio" id="portfolioScroller">
-            <?php foreach ($categories as $category){ ?>
-                <li class="portfolio-item">
-                    <a href="categorie.php" > <img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
-                    <h3><?= $category['name']; ?></h3>
-                    <p><?= $category['year']; ?></p>
                 </li>
                 <li>
                     <a href="reserveren.php" class="text-black font-semibold pb-1 text-m">
@@ -94,13 +82,13 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
                     <div class="portfolio-item min-w-[300px] md:min-w-[400px] snap-center">
                         <a href="categorie.php"
                            class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
-                            <img src="images/<?= $category['cover']; ?>"
-                                 alt="<?= $category['name']; ?>"
+                            <img src="images/<?= htmlspecialchars($category['cover'], ENT_QUOTES); ?>"
+                                 alt="<?= htmlspecialchars($category['name'], ENT_QUOTES); ?>"
                                  class="w-full h-[500px] object-cover hover:scale-105 transition duration-500">
                         </a>
                         <div class="mt-4 text-center">
-                            <h3 class="text-xl font-semibold uppercase"><?= $category['name']; ?></h3>
-                            <p class="text-gray-500"><?= $category['year']; ?></p>
+                            <h3 class="text-xl font-semibold uppercase"><?= htmlspecialchars($category['name']); ?></h3>
+                            <p class="text-gray-500"><?= htmlspecialchars($category['year']); ?></p>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -115,7 +103,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 </main>
 
 <footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
-    &copy; <?= date("Y") ?> HOEX Fotografie
+    &copy; <?= date('Y') ?> HOEX Fotografie
 </footer>
 <script src="js/scrolling.js"></script>
 </body>

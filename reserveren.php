@@ -2,6 +2,16 @@
 require_once "includes/database.php";
 
 
+$showForm = true;
+
+//verbergt het formulier na invullen
+if (isset($_GET['status'])) {
+    $status = $_GET['status'];
+    if ($status === 'verzonden') {
+        $showForm = false;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,16 +53,23 @@ require_once "includes/database.php";
 </nav>
 <main class="container mx-auto py-10 px-4">
     <section class="max-w-2xl mx-auto bg-white p-8 rounded shadow-xl border-t-4 border-shadow-grey">
-
-        <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
-            <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">Maak een Afspraak</h1>
-            <a href="index.php"
-               class="text-xs font-bold uppercase tracking-widest text-dark-grey hover:text-black transition-colors">
-                &larr; Annuleren
-            </a>
-        </div>
-
-        <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <?php if (!$showForm):?>
+            <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+                <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">De afspraak staat!</h1>
+                <a href="index.php"
+                   class="text-xs font-bold uppercase tracking-widest text-dark-grey hover:text-black transition-colors">
+                    &larr; Terug
+                </a>
+            </div>
+        <?php else: ?>
+            <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+                <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">Maak een Afspraak</h1>
+                <a href="index.php"
+                   class="text-xs font-bold uppercase tracking-widest text-dark-grey hover:text-black transition-colors">
+                    &larr; Annuleren
+                </a>
+            </div>
+        <form action="send-email.php" method="POST" enctype="multipart/form-data" class="space-y-6">
 
             <div>
                 <label for="name"
@@ -71,7 +88,7 @@ require_once "includes/database.php";
                 <div>
                     <label for="phone"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Telefoonnummer</label>
-                    <input type="tel" id="phone" name="phone" placeholder="06 12345678" required
+                    <input type="tel" id="phone" name="phone" placeholder="06 12345678"
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
             </div>
@@ -88,14 +105,14 @@ require_once "includes/database.php";
                     <label for="job"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
                         klus</label>
-                    <input type="datetime-local" id="job" name="job" required
+                    <input type="datetime-local" id="job" name="job"
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
                 <div>
                     <label for="deadline"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
                         deadline</label>
-                    <input type="datetime-local" id="deadline" name="deadline" required
+                    <input type="datetime-local" id="deadline" name="deadline"
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
                 <div>
@@ -108,9 +125,9 @@ require_once "includes/database.php";
             </div>
 
             <div>
-                <label for="task" class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Soort
+                <label for="message" class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Soort
                     opdracht</label>
-                <textarea id="task" name="task" rows="4" placeholder="Beschrijf hier de opdracht..." required
+                <textarea id="message" name="message" rows="4" placeholder="Beschrijf hier de opdracht..."
                           class="w-full border resize-none
  border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none"></textarea>
             </div>
@@ -128,6 +145,8 @@ require_once "includes/database.php";
                 </button>
             </div>
         </form>
+        <?php endif; ?>
+
 
         <footer class="mt-8 text-center text-gray-400 text-[10px] uppercase tracking-widest">
             &copy; <?= date("Y") ?> HOEX Fotografie
