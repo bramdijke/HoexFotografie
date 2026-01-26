@@ -3,8 +3,10 @@
 /** @var mysqli $db */
 
 require_once "includes/database.php";
+require_once "includes/image-helper.php";
 
-$showForm = false;
+$showAdd = false;
+$showEdit = false;
 $showDelete = false;
 
 $query = "SELECT * FROM categorieën";
@@ -12,12 +14,10 @@ $results = mysqli_query($db, $query);
 $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
 if (isset($_POST['add'])) {
-    $showForm = true;
+    $showAdd = true;
 }
 
-if (isset($_POST['submit'])) {
-    require_once "includes/image-helper.php";
-
+if (isset($_POST['addSubmit'])) {
     $name = mysqli_escape_string($db, $_POST['name']);
     $year = mysqli_escape_string($db, $_POST['year']);
 
@@ -36,6 +36,35 @@ if (isset($_POST['submit'])) {
         exit;
         }
 
+}
+if (isset($_POST['edit'])) {
+    $showEdit = true;
+}
+if (isset($_POST['editSubmit'])) {
+
+    $categorie_id = $_POST['categorie_id'];
+
+    if (isset($_FILES['newCover']) && $_FILES['newCover']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $newCover = addImageFile($_FILES['newCover']);
+
+        if ($newCover) {
+            $cover = $_POST['oldCover'];
+
+            if (file_exists("images/$cover")) {
+                unlink("images/$cover");
+            }
+            $newCoverEscaped = mysqli_escape_string($db, $newCover);
+
+            $query = "UPDATE `categorieën` SET `cover` = '$newCoverEscaped' WHERE `categorie_id` = $categorie_id";
+            mysqli_query($db, $query);
+
+
+        }
+    }
+
+    mysqli_close($db);
+    header("Location: portfolio-bewerken.php");
+    exit;
 }
 
 if (isset($_POST['delete'])) {
@@ -82,12 +111,12 @@ if (isset($_POST['delete'])) {
 
 <main>
     <div>
-        <?php if(!$showForm): ?>
+        <?php if(!$showAdd): ?>
             <form method="post" action="">
                 <button type="submit" name="add">Map toevoegen</button>
             </form>
         <?php endif; ?>
-        <?php if ($showForm): ?>
+        <?php if ($showAdd): ?>
             <form action="" method="post" enctype="multipart/form-data">
                 <label for="name">Map naam</label>
                 <input type="text" id="name" name="name">
@@ -100,7 +129,7 @@ if (isset($_POST['delete'])) {
                 <label for="cover">Cover foto</label>
                 <input type="file" name="cover" id="cover">
 
-                <button type="submit" name="submit">Map toevoegen</button>
+                <button type="submit" name="addSubmit">Map toevoegen</button>
             </form>
         <?php endif; ?>
     </div>
@@ -113,6 +142,21 @@ if (isset($_POST['delete'])) {
                     <a href="categorie.php?id=<?= $category['categorie_id'] ?>" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
+                    <?php if(!$showEdit): ?>
+                        <form method="post" action="">
+                            <button type="submit" name="edit">Cover Veranderen</button>
+                        </form>
+                    <?php endif; ?>
+                    <?php if ($showEdit): ?>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="categorie_id" id="categorie_id" value="<?= $category['categorie_id']?>">
+                            <input type="hidden" name="oldCover" id="oldCover" value="<?= $category['cover']?>">
+
+                            <input type="file" name="newCover" id="newCover">
+
+                            <button type="submit" name="editSubmit">Cover Veranderen</button>
+                        </form>
+                    <?php endif; ?>
                     <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
                         <input type="hidden" name="categorie_id" value="<?= $category['categorie_id'] ?>"/>
                         <input type="hidden" name="cover" value="<?= $category['cover'] ?>"/>
