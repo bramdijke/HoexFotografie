@@ -9,7 +9,7 @@ $showAdd = false;
 $showEdit = false;
 $showDelete = false;
 
-$query = "SELECT * FROM categorieën";
+$query = "SELECT * FROM categories";
 $results = mysqli_query($db, $query);
 $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
@@ -26,7 +26,7 @@ if (isset($_POST['addSubmit'])) {
     } else {
         $cover = addImageFile($_FILES['cover']);
 
-        $query = "INSERT INTO categorieën (name, year, cover) VALUES ('$name', '$year', '$cover')";
+        $query = "INSERT INTO categories (name, year, cover) VALUES ('$name', '$year', '$cover')";
         $result = mysqli_query($db, $query);
 
         mysqli_close($db);
@@ -74,9 +74,9 @@ if (isset($_POST['delete'])) {
         unlink("images/$cover");
     }
 
-    $categorie_id = mysqli_escape_string($db, $_POST['categorie_id']);
+    $categorie_id = mysqli_escape_string($db, $_POST['category_id']);
 
-    $query = "DELETE FROM categorieën WHERE categorie_id = '$categorie_id'";
+    $query = "DELETE FROM categories WHERE category_id = '$categorie_id'";
     mysqli_query($db, $query);
 
     mysqli_close($db);
@@ -139,7 +139,9 @@ if (isset($_POST['delete'])) {
         <ul class="portfolio" id="portfolioScroller">
             <?php foreach ($categories as $category){ ?>
                 <li class="portfolio-item">
-                    <a href="categorie.php?id=<?= $category['categorie_id'] ?>" ><img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
+                    <a href="categorie.php?category_id=<?= $category['category_id'] ?>">
+
+                    <img src="images/<?= $category['cover']; ?>" alt="Cover foto van <?= $category['name']; ?>"></a>
                     <h3><?= $category['name']; ?></h3>
                     <p><?= $category['year']; ?></p>
                     <?php if(!$showEdit): ?>
@@ -158,7 +160,7 @@ if (isset($_POST['delete'])) {
                         </form>
                     <?php endif; ?>
                     <form method="post" action="" onsubmit="return confirm('Weet je het zeker?');">
-                        <input type="hidden" name="categorie_id" value="<?= $category['categorie_id'] ?>"/>
+                        <input type="hidden" name="category_id" value="<?= $category['category_id'] ?>"/>
                         <input type="hidden" name="cover" value="<?= $category['cover'] ?>"/>
                         <button type="submit" name="delete">Map verwijderen</button>
                     </form>

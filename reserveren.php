@@ -1,3 +1,8 @@
+<?php
+require_once "includes/database.php";
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,38 +14,31 @@
 </head>
 <body class="bg-gray-50 font-sans leading-normal tracking-normal text-shadow-grey">
 
-<nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-2 grid grid-cols-3 items-center">
-
-        <ul class="flex items-center space-x-6">
-            <li>
-                <a href="portfolio.php"
-                   class="text-black font-medium hover:text-gray-600 transition duration-300 text-sm">
-                    Portfolio
-                </a>
+<nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-2 flex flex-col md:grid md:grid-cols-3 items-center gap-4 md:gap-0">
+        <ul class="flex items-center space-x-6 md:space-x-8 order-2 md:order-1">
+            <li><a href="portfolio.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Portfolio</a>
             </li>
-            <li>
-                <a href="reserveren.php" class="text-black font-semibold pb-1 text-sm">
-                    Reserveren
-                </a>
+            <li><a href="reserveren.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Reserveren</a>
             </li>
-            <li>
-                <a href="about.php" class="text-black font-semibold pb-1 text-sm">
-                    About
-                </a>
+            <li><a href="about.php"
+                   class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">About</a>
             </li>
         </ul>
 
-        <div class="flex justify-center">
+        <div class="flex justify-center order-1 md:order-2">
             <a href="index.php" class="flex items-center">
-                <img src="images/hoexfotografie-logo.png"
-                     alt="hoexfotografie logo"
-                     class="h-10 w-auto py-1 object-contain hover:opacity-80 transition duration-300">
+                <img src="images/hoexfotografie-logo.png" alt="hoex logo" class="h-10 md:h-14 w-auto object-contain">
             </a>
         </div>
 
-        <div class="flex justify-end"></div>
-
+        <div class="hidden md:flex justify-end order-3">
+            <div class="flex space-x-4 text-gray-500">
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+            </div>
+        </div>
     </div>
 </nav>
 <main class="container mx-auto py-10 px-4">
@@ -80,10 +78,24 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="date_1"
+                    <label for="appointment"
                            class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
-                        Opdracht</label>
-                    <input type="datetime-local" id="date_1" name="date_1" required
+                        afspraak</label>
+                    <input type="date" id="appointment" name="appointment" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
+                </div>
+                <div>
+                    <label for="job"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
+                        klus</label>
+                    <input type="datetime-local" id="job" name="job" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
+                </div>
+                <div>
+                    <label for="deadline"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Datum
+                        deadline</label>
+                    <input type="datetime-local" id="deadline" name="deadline" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none">
                 </div>
                 <div>
@@ -102,7 +114,13 @@
                           class="w-full border resize-none
  border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-shadow-grey outline-none"></textarea>
             </div>
+           <div>
+            <input type="radio" id="zakelijk" name="option" value="zakelijk" />
+            <label for="zakelijk">zakelijk</label>
 
+            <input type="radio" id="particulier" name="option" value="particulier" />
+            <label for="particulier">particulier</label>
+           </div>
             <div class="pt-4">
                 <button type="submit"
                         class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-shadow-grey">
