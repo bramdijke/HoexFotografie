@@ -1,7 +1,7 @@
 <?php
 require_once "includes/database.php";
 
-$query = "SELECT * FROM afspraken";
+$query = "SELECT * FROM appointments";
 $result = mysqli_query($db, $query);
 $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
