@@ -84,29 +84,29 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <?php foreach ($reservations as $res): ?>
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition duration-150">
                             <td class="py-3 px-4 text-left whitespace-nowrap font-medium">
-                                <?= htmlspecialchars($res['klant_naam']) ?>
+                                <?= htmlspecialchars($res['name'] . ' ' . $res['surname']) ?>
                             </td>
                             <td class="py-3 px-4 text-left">
-                                <?= htmlspecialchars($res['email']) ?>
+                                <?= htmlspecialchars($res['e-mail']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <?= htmlspecialchars($res['telefoonnummer']) ?>
+                                <?= htmlspecialchars($res['phone']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <?= htmlspecialchars($res['datum_afspraak']) ?>
+                                <?= htmlspecialchars($res['appointment']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <?= htmlspecialchars($res['datum_opdracht']) ?>
+                                <?= htmlspecialchars($res['job']) ?>
                             </td>
                             <td class="py-3 px-4 text-left">
-                                <?= htmlspecialchars($res['locatie']) ?>
+                                <?= htmlspecialchars($res['deadline']) ?>
                             </td>
                             <td class="py-3 px-4 text-left">
-                                <?= htmlspecialchars($res['soort_opdracht']) ?>
+                                <?= htmlspecialchars($res['customer_type']) ?>
                             </td>
                             <td class="py-3 px-4 text-center">
-                                <?php if (!empty($res['inspiratie_bestand'])): ?>
-                                    <a href="uploads/<?= htmlspecialchars($res['inspiratie_bestand']) ?>"
+                                <?php if (!empty($res['file'])): ?>
+                                    <a href="uploads/<?= htmlspecialchars($res['file']) ?>"
                                        class="text-blue-500 hover:underline flex items-center justify-center">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -142,7 +142,6 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
-
                 </tbody>
             </table>
         </div>
