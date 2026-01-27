@@ -95,7 +95,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
     </div>
 </main>
 
-<footer class="py-12 border-t border-gray-100 text-center text-gray-400 text-[10px] uppercase tracking-widest">
+<footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
     &copy; <?= date("Y") ?> HOEX Fotografie
 </footer>
 
