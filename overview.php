@@ -57,7 +57,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <table class="min-w-full bg-white border border-gray-200">
                 <thead>
                 <tr class="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
-                    <th class="py-3 px-4 text-left">Klant Naam</th>
+                    <th class="py-3 px-4 text-left">Naam</th>
                     <th class="py-3 px-4 text-left">Email</th>
                     <th class="py-3 px-4 text-center">Telefoon</th>
                     <th class="py-3 px-4 text-center">Afspraak</th>

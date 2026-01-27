@@ -1,5 +1,26 @@
 <?php
 require_once "includes/database.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $surname = mysqli_real_escape_string($db, $_POST['surname']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $phone = mysqli_real_escape_string($db, $_POST['phone']);
+    $appointment = mysqli_real_escape_string($db, $_POST['appointment']);
+    $job = mysqli_real_escape_string($db, $_POST['job']);
+    $deadline = mysqli_real_escape_string($db, $_POST['deadline']);
+    $info = mysqli_real_escape_string($db, $_POST['task']);
+    $customer_type = mysqli_real_escape_string($db, $_POST['option']);
+
+    $query = "INSERT INTO appointments (name, surname, `e-mail`, phone, appointment, job, deadline, info, file, customer_type) 
+              VALUES ('$name', '$surname', '$email', '$phone', '$appointment', '$job', '$deadline', '$info', '', '$customer_type')";
+
+    if (mysqli_query($db, $query)) {
+        echo "<script>alert('Afspraak succesvol verzonden!'); window.location.href='index.php';</script>";
+    } else {
+        echo "Error: " . mysqli_error($db);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,11 +86,18 @@ require_once "includes/database.php";
 
         <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
 
-            <div>
-                <label for="name"
-                       class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Naam</label>
-                <input type="text" name="name" id="name" placeholder="Uw volledige naam" required
-                       class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="name" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Voornaam</label>
+                    <input type="text" name="name" id="name" placeholder="Bijv. Jan" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                </div>
+                <div>
+                    <label for="surname"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Achternaam</label>
+                    <input type="text" name="surname" id="surname" placeholder="Bijv. Jansen" required
+                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
