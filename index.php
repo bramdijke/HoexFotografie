@@ -72,7 +72,8 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             <?php foreach ($categories as $category): ?>
                 <div class="group/item w-full">
-                    <a href="categorie.php?id=<?= isset($category['id']) ? $category['id'] : '' ?>"
+                    <a href="categorie-klant.php?category_id=<?= $category['category_id']; ?>"
+
                        class="block relative overflow-hidden rounded-2xl shadow-lg">
 
                         <img src="images/<?= $category['cover']; ?>"

@@ -42,7 +42,7 @@ if (isset($_POST['edit'])) {
 }
 if (isset($_POST['editSubmit'])) {
 
-    $categorie_id = $_POST['categorie_id'];
+    $categorie_id = $_POST['category_id'];
 
     if (isset($_FILES['newCover']) && $_FILES['newCover']['error'] !== UPLOAD_ERR_NO_FILE) {
         $newCover = addImageFile($_FILES['newCover']);
@@ -55,7 +55,7 @@ if (isset($_POST['editSubmit'])) {
             }
             $newCoverEscaped = mysqli_escape_string($db, $newCover);
 
-            $query = "UPDATE `categorieën` SET `cover` = '$newCoverEscaped' WHERE `categorie_id` = $categorie_id";
+            $query = "UPDATE `categories` SET `cover` = '$newCoverEscaped' WHERE `category_id` = $categorie_id";
             mysqli_query($db, $query);
 
 
@@ -76,7 +76,7 @@ if (isset($_POST['delete'])) {
 
     $categorie_id = mysqli_escape_string($db, $_POST['category_id']);
 
-    $query = "DELETE FROM categories WHERE category_id = '$categorie_id'";
+    $query = "DELETE FROM categories WHERE category_id = '$category_id'";
     mysqli_query($db, $query);
 
     mysqli_close($db);
@@ -151,7 +151,7 @@ if (isset($_POST['delete'])) {
                     <?php endif; ?>
                     <?php if ($showEdit): ?>
                         <form action="" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="categorie_id" id="categorie_id" value="<?= $category['categorie_id']?>">
+                            <input type="hidden" name="categorie_id" id="categorie_id" value="<?= $category['category_id']?>">
                             <input type="hidden" name="oldCover" id="oldCover" value="<?= $category['cover']?>">
 
                             <input type="file" name="newCover" id="newCover">
