@@ -135,9 +135,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
                 <div>
-                    <label for="files" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Bestanden</label>
-                    <input type="file" id="files" name="files[]" multiple accept="image/*,.pdf"
-                           class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-gray-100 file:text-black hover:file:bg-gray-200 cursor-pointer">
+                    <label for="files" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Bestand</label>
+                    <input type="file" id="files" name="files" accept="image/*,.pdf"
+                        class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-gray-100 file:text-black hover:file:bg-gray-200 cursor-pointer">
                 </div>
             </div>
 
