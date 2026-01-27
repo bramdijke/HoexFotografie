@@ -3,7 +3,6 @@ include 'includes/database.php';
 $intro = "Hi there! Welcome to the Hoex Fotografie website. Here you can explore our portfolio and make reservations for photography sessions. Why not start by checking out our portfolio or make a reservation today? <br>Thank you for visiting, and we look forward to capturing your special moments!";
 
 /** @var mysqli $db */
-// Added LIMIT 3 to the query to only fetch the first three categories
 $query = "SELECT * FROM categories LIMIT 3";
 $results = mysqli_query($db, $query);
 $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
@@ -95,7 +94,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
     </div>
 </main>
 
-<footer class="py-12 border-t border-gray-100 text-center text-gray-400 text-[10px] uppercase tracking-widest">
+<footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
     &copy; <?= date("Y") ?> HOEX Fotografie
 </footer>
 

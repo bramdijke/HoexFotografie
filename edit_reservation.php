@@ -10,8 +10,9 @@ $id = mysqli_real_escape_string($db, $_GET['id']);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Koppelen aan de juiste database kolommen
+    // Collect and sanitize all inputs including surname
     $name = mysqli_real_escape_string($db, $_POST['name']);
+    $surname = mysqli_real_escape_string($db, $_POST['surname']); // Added
     $email = mysqli_real_escape_string($db, $_POST['e-mail']);
     $phone = mysqli_real_escape_string($db, $_POST['phone']);
     $appointment = mysqli_real_escape_string($db, $_POST['appointment']);
@@ -19,14 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deadline = mysqli_real_escape_string($db, $_POST['deadline']);
     $customer_type = mysqli_real_escape_string($db, $_POST['customer_type']);
 
-    if (empty($name) || empty($email)) {
-        $errors[] = "Naam en Email zijn verplichte velden.";
+    if (empty($name) || empty($surname) || empty($email)) {
+        $errors[] = "Voornaam, Achternaam en Email zijn verplichte velden.";
     }
 
     if (empty($errors)) {
-        // Query aangepast naar de tabel 'appointments' en de juiste kolomnamen
+        // Updated query to include surname
         $updateQuery = "UPDATE appointments SET 
                         name = '$name', 
+                        surname = '$surname', 
                         `e-mail` = '$email', 
                         phone = '$phone', 
                         appointment = '$appointment',
@@ -63,13 +65,29 @@ if (!$res) {
 <body class="bg-gray-50 font-sans p-10">
 
 <main class="max-w-2xl mx-auto bg-white p-8 rounded shadow-xl border-t-4 border-black">
-    <h1 class="text-2xl font-black uppercase mb-8">Reservering Bewerken</h1>
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-black uppercase tracking-tighter">Reservering Bewerken</h1>
+        <a href="overview.php" class="text-[10px] font-bold uppercase text-gray-400 hover:text-black">&larr; Terug</a>
+    </div>
+
+    <?php if (!empty($errors)): ?>
+        <div class="bg-red-50 text-red-600 p-4 mb-6 rounded text-xs font-bold uppercase tracking-widest">
+            <?php foreach ($errors as $error) echo $error . "<br>"; ?>
+        </div>
+    <?php endif; ?>
 
     <form action="" method="POST" class="space-y-6">
-        <div>
-            <label class="block text-[10px] font-bold uppercase text-gray-500 mb-2">Volledige Naam</label>
-            <input type="text" name="name" value="<?= htmlspecialchars($res['name']) ?>"
-                   class="w-full border p-3 rounded text-sm outline-none focus:ring-1 focus:ring-black">
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <label class="block text-[10px] font-bold uppercase text-gray-500 mb-2">Voornaam</label>
+                <input type="text" name="name" value="<?= htmlspecialchars($res['name']) ?>"
+                       class="w-full border p-3 rounded text-sm outline-none focus:ring-1 focus:ring-black">
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold uppercase text-gray-500 mb-2">Achternaam</label>
+                <input type="text" name="surname" value="<?= htmlspecialchars($res['surname']) ?>"
+                       class="w-full border p-3 rounded text-sm outline-none focus:ring-1 focus:ring-black">
+            </div>
         </div>
 
         <div class="grid grid-cols-2 gap-6">
@@ -92,7 +110,7 @@ if (!$res) {
                        class="w-full border p-3 rounded text-sm outline-none focus:ring-1 focus:ring-black">
             </div>
             <div>
-                <label class="block text-[10px] font-bold uppercase text-gray-500 mb-2">Opdracht</label>
+                <label class="block text-[10px] font-bold uppercase text-gray-500 mb-2">Opdracht (Datum/Tijd)</label>
                 <input type="text" name="job" value="<?= htmlspecialchars($res['job']) ?>"
                        class="w-full border p-3 rounded text-sm outline-none focus:ring-1 focus:ring-black">
             </div>
@@ -112,7 +130,7 @@ if (!$res) {
         </div>
 
         <button type="submit"
-                class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs hover:bg-gray-800 transition-all">
+                class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs hover:bg-gray-800 transition-all shadow-lg">
             Wijzigingen Opslaan
         </button>
     </form>
