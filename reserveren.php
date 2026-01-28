@@ -136,22 +136,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <label for="appointment"
 
-                           class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
-                        afspraak</label>
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Afspraak
+                           Datum
+</label>
                     <input type="date" id="appointment" name="appointment" required
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
                 <div>
-                    <label for="job" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
-                        klus</label>
+                    <label for="job"
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Opdracht Datum
+                        </label>
                     <input type="datetime-local" id="job" name="job"
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>
                 <div>
                     <label for="deadline"
 <<<<<<< Updated upstream
-                           class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Datum
-                        deadline</label>
+                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2"> Opleverdatum
+                        </label>
                     <input type="datetime-local" id="deadline" name="deadline"
                            class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
                 </div>

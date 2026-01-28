@@ -70,10 +70,10 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
             <div id="portfolioScroller" class="flex overflow-x-auto gap-6 no-scrollbar snap-x snap-mandatory">
                 <?php foreach ($categories as $category) : ?>
                     <div class="portfolio-item min-w-[300px] md:min-w-[400px] snap-center">
-                        <a href="categorie.php"
-                           class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
-                            <img src="images/<?= htmlspecialchars($category['cover'], ENT_QUOTES); ?>"
-                                 alt="<?= htmlspecialchars($category['name'], ENT_QUOTES); ?>"
+                        <a href="categories-klant.php?category_id=<?= $category['category_id']; ?>"
+                            class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
+                            <img src="images/<?= $category['cover']; ?>"
+                                 alt="<?= $category['name']; ?>"
                                  class="w-full h-[500px] object-cover hover:scale-105 transition duration-500">
                         </a>
                         <div class="mt-4 text-center">
@@ -93,7 +93,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 </main>
 
 <footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
-    &copy; <?= date('Y') ?> HOEX Fotografie
+    &copy; <?= date("Y") ?> HOEX Fotografie
 </footer>
 <script src="js/scrolling.js"></script>
 </body>

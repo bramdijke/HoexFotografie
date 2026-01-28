@@ -72,11 +72,12 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             <?php foreach ($categories as $category): ?>
                 <div class="group/item w-full">
-                    <a href="categorie.php?id=<?= isset($category['id']) ? $category['id'] : '' ?>"
-                       class="block relative overflow-hidden rounded-2xl shadow-lg">
+                    <a href="categories-klant.php?category_id=<?= $category['category_id']; ?>"
 
-                        <img src="images/<?= $category['cover']; ?>"
-                             alt="<?= $category['name']; ?>"
+                    class="block relative overflow-hidden rounded-2xl shadow-lg">
+
+                        <img src="/images/<?= htmlspecialchars($category['cover']); ?>"
+                             alt="<?= htmlspecialchars($category['name']); ?>"
                              class="w-full h-[550px] object-cover transition-transform duration-700 group-hover/item:scale-110">
 
                         <div class="absolute inset-0 bg-black/30 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-end p-8">
