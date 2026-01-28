@@ -1,3 +1,8 @@
+<?php
+$showForm = true;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +19,15 @@
 
 </header>
 <main>
+    <?php if ($showForm): ?>
+    <h1>test succes</h1>
+    <?php else: ?>
     <h1><a href="overview.php">Reserveringen</a></h1>
     <h1><a href="portfolio-bewerken.php">Portfolio Beheren</a></h1>
+    <?php endif; ?>
+
+
+
 </main>
 </body>
 </html>
