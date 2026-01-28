@@ -67,7 +67,7 @@ $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
             <div id="portfolioScroller" class="flex overflow-x-auto gap-6 no-scrollbar snap-x snap-mandatory">
                 <?php foreach ($categories as $category) : ?>
                     <div class="portfolio-item min-w-[300px] md:min-w-[400px] snap-center">
-                        <a href="categorie-klant.php?category_id=<?= $category['category_id']; ?>"
+                        <a href="categories-klant.php?category_id=<?= $category['category_id']; ?>"
                             class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
                             <img src="images/<?= $category['cover']; ?>"
                                  alt="<?= $category['name']; ?>"
