@@ -21,7 +21,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-2 flex flex-col md:grid md:grid-cols-3 items-center gap-4 md:gap-0">
         <ul class="flex items-center space-x-6 md:space-x-8 order-2 md:order-1">
-            <li><a href="portfolio.php"
+            <li><a href="portfolio-bewerken.php"
                    class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Portfolio
                     bewerken</a>
             </li>
@@ -141,12 +141,10 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </tbody>
             </table>
         </div>
-
-        <div class="mt-6 text-center text-gray-400 text-xs">
-            &copy; <?= date("Y") ?> HOEX Fotografie
-        </div>
     </section>
 </main>
-
+<footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
+    &copy; <?= date("Y") ?> HOEX Fotografie
+</footer>
 </body>
 </html>

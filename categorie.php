@@ -117,65 +117,113 @@ $stmtFotos->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($cname) ?> bewerken</title>
-    <link rel="stylesheet" href="styles/stylesheet.css">
+    <title><?= htmlspecialchars($cname) ?> bewerken - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal text-gray-900">
+
 <header>
-    <nav class="sticky-top">
-        <p>HOEX</p>
-        <ul>
-            <li><a href="portfolio-bewerken.php">Portfolio bewerken</a></li>
-            <li><a href="overview.php">Reserveringen</a></li>
-        </ul>
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-2 flex flex-col md:grid md:grid-cols-3 items-center gap-4 md:gap-0">
+            <ul class="flex items-center space-x-6 md:space-x-8 order-2 md:order-1">
+                <li><a href="portfolio-bewerken.php"
+                       class="text-xs uppercase tracking-widest font-bold border-b border-black pb-1">Portfolio
+                        bewerken</a></li>
+                <li><a href="overview.php"
+                       class="text-xs uppercase tracking-widest font-medium hover:text-gray-500 transition">Reserveringen</a>
+                </li>
+            </ul>
+
+            <div class="flex justify-center order-1 md:order-2">
+                <a href="index.php" class="flex items-center">
+                    <img src="images/hoexfotografie-logo.png" alt="hoex logo"
+                         class="h-10 md:h-14 w-auto object-contain">
+                </a>
+            </div>
+
+            <div class="hidden md:flex justify-end order-3">
+                <a href="#" class="text-gray-500 hover:text-black transition"><i
+                            class="fa-brands fa-instagram text-lg"></i></a>
+            </div>
+        </div>
     </nav>
 </header>
 
-<main>
-    <h1><?= htmlspecialchars($cname) ?> bewerken</h1>
-    <p>Jaar: <?= htmlspecialchars($cyear) ?></p>
+<main class="container mx-auto px-6 py-12 max-w-6xl">
 
-    <img
-            src="images/<?= htmlspecialchars($ccover) ?>"
-            alt="Cover foto van <?= htmlspecialchars($cname) ?>"
-            style="max-width: 400px; height: 400px;"
-    >
-
-    <h2>Foto’s in <?= htmlspecialchars($cname) ?></h2>
-
-    <?php if (empty($fotos)){ ?>
-        <p>Deze categorie heeft nog geen foto’s.</p>
-    <?php } else{ ?>
-        <div class="foto-grid">
-            <?php foreach ($fotos as $foto){ ?>
-                <div class="foto-item">
-                    <img
-                            src="images/<?= htmlspecialchars($foto['image']) ?>"
-                            alt="Foto <?= htmlspecialchars($foto['id']) ?>"
-                            style="width: 250px; height: 250px; object-fit: cover;"
-                    >
-                </div>
-            <?php }; ?>
+    <div class="flex flex-col md:flex-row gap-8 items-start mb-12 bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+        <div class="w-full md:w-64 shrink-0">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Cover Afbeelding</p>
+            <img src="images/<?= htmlspecialchars($ccover) ?>"
+                 alt="Cover"
+                 class="w-full aspect-square object-cover rounded-lg shadow-md border border-gray-200">
         </div>
-    <?php }; ?>
-<!--Add to category-->
-    <form method="POST" enctype="multipart/form-data" style="margin: 16px 0;">
-        <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id) ?>">
 
-        <label for="photo">Foto toevoegen:</label>
-        <input type="file" name="photo" id="photo" accept="image/*" required>
+        <div class="flex-grow w-full">
+            <h1 class="text-4xl font-black uppercase tracking-tighter mb-1"><?= htmlspecialchars($cname) ?></h1>
+            <p class="text-gray-400 font-bold uppercase tracking-widest text-xs mb-8"><?= htmlspecialchars($cyear) ?></p>
 
-        <button type="submit" name="add_photo">Upload</button>
-    </form>
-<!--Delete from category-->
-    <form method="POST" onsubmit="return confirm('Weet je zeker dat je deze foto wilt verwijderen?');">
-        <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id) ?>">
-        <input type="hidden" name="photo_id" value="<?= htmlspecialchars($foto['id']) ?>">
-        <button type="submit" name="delete_photo">Verwijderen</button>
-    </form>
+            <div class="bg-gray-50 p-6 rounded-lg border-2 border-dashed border-gray-200">
+                <h3 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-4">Nieuwe foto toevoegen aan
+                    deze map</h3>
+                <form method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row gap-4">
+                    <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id) ?>">
+                    <input type="file" name="photo" id="photo" accept="image/*" required
+                           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-black file:text-white hover:file:bg-gray-800 cursor-pointer">
+                    <button type="submit" name="add_photo"
+                            class="bg-black text-white px-8 py-3 rounded text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition shadow-lg shrink-0">
+                        Uploaden
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <div class="flex justify-between items-end mb-8">
+        <h2 class="text-2xl font-black uppercase tracking-tighter">Inhoud van de map</h2>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400"><?= count($fotos) ?> foto's</span>
+    </div>
 
+    <?php if (empty($fotos)): ?>
+        <div class="text-center py-20 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <p class="text-gray-400 uppercase text-xs tracking-widest">Deze categorie heeft nog geen foto’s.</p>
+        </div>
+    <?php else: ?>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <?php foreach ($fotos as $foto): ?>
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 group">
+                    <div class="aspect-square overflow-hidden rounded-lg mb-3">
+                        <img src="images/<?= htmlspecialchars($foto['image']) ?>"
+                             alt="Foto"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    <form method="POST" onsubmit="return confirm('Weet je zeker dat je deze foto wilt verwijderen?');">
+                        <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id) ?>">
+                        <input type="hidden" name="photo_id" value="<?= htmlspecialchars($foto['id']) ?>">
+                        <button type="submit" name="delete_photo"
+                                class="w-full py-2 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-widest rounded hover:bg-red-600 hover:text-white transition-all">
+                            <i class="fa-solid fa-trash-can mr-2"></i> Verwijderen
+                        </button>
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="mt-20 text-center">
+        <a href="portfolio-bewerken.php"
+           class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors">
+            &larr; Terug naar mappen overzicht
+        </a>
+    </div>
 </main>
+
+<footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
+    &copy; <?= date("Y") ?> HOEX Fotografie
+</footer>
+
 </body>
 </html>
 
