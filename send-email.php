@@ -1,4 +1,6 @@
 <?php
+// Voeg de database verbinding toe!
+require_once "includes/database.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -7,59 +9,73 @@ use PHPMailer\PHPMailer\Exception;
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Load PHPMailer
 require 'PHPMailer/PHPMailer-master/src/Exception.php';
 require 'PHPMailer/PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer/PHPMailer-master/src/SMTP.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $name    = htmlspecialchars($_POST["name"]);
-    $email   = htmlspecialchars($_POST["email"]);
-    $firstContact   = htmlspecialchars($_POST["appointment"]);
-    $shootDay   = htmlspecialchars($_POST["job"]);
-    $deliveryDate   = htmlspecialchars($_POST["deadline"]);
-    $phoneNumber   = htmlspecialchars($_POST["phone"]);
+    // 1. Gegevens ophalen en beveiligen voor de database
+    $name = mysqli_real_escape_string($db, $_POST['name']);
+    $surname = mysqli_real_escape_string($db, $_POST['surname']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $phone = mysqli_real_escape_string($db, $_POST['phone']);
+    $appointment = mysqli_real_escape_string($db, $_POST['appointment']);
+    $job = mysqli_real_escape_string($db, $_POST['job']);
+    $deadline = mysqli_real_escape_string($db, $_POST['deadline']);
+    $info = mysqli_real_escape_string($db, $_POST['task']);
+    $customer_type = mysqli_real_escape_string($db, $_POST['option']);
 
+    // 2. Eerst opslaan in de DATABASE
+    $query = "INSERT INTO appointments (name, surname, `e-mail`, phone, appointment, job, deadline, info, file, customer_type) 
+              VALUES ('$name', '$surname', '$email', '$phone', '$appointment', '$job', '$deadline', '$info', '', '$customer_type')";
 
-    $message = "Hoi $name, bedankt voor de reservering.
-Onze eerste afspraak zal zijn op $firstContact. De schietdag zelf is op $shootDay. En u heeft een opleverdatum aangevraagd van $deliveryDate. 
-Ik bel u zo snel mogelijk op $phoneNumber. 
+    $db_success = mysqli_query($db, $query);
 
-Mocht deze informatie niet kloppen kunt u via de onderstaande link 1 week van te voren aanpassen.
-<a href='about.php'>Werkt nog niet</a> ";
-
+    // 3. Nu de EMAIL versturen (PHPMailer)
     $mail = new PHPMailer(true);
 
     try {
         // SMTP settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'sennasolcer@gmail.com';       // YOUR Gmail
-        $mail->Password   = 'hifl dtae jxzu swjt';         // App Password
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'sennasolcer@gmail.com';
+        $mail->Password = 'hifl dtae jxzu swjt';
         $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $mail->Port = 587;
 
-        // Email content
-        $mail->setFrom('sennasolcer@gmail.com', 'Website Contact');
-        $mail->addAddress($email);       // where you want emails
-        $mail->addReplyTo($email, $name);
+        // Email ontvanger en inhoud
+        $mail->setFrom('sennasolcer@gmail.com', 'HOEX Fotografie');
+        $mail->addAddress($email);
 
-        $mail->Subject = 'New Contact Form Message';
-        $mail->Body    =
-            "Name: $name\n" .
-            "Email: $email\n\n" .
-            "Message:\n$message";
+        $mail->isHTML(true); // Zorg dat HTML links werken
+        $mail->Subject = 'Bevestiging Reservering - HOEX Fotografie';
+
+        $mailContent = "
+            <h2>Hoi $name,</h2>
+            <p>Bedankt voor de reservering. Hier zijn de details:</p>
+            <ul>
+                <li><strong>Eerste afspraak:</strong> $appointment</li>
+                <li><strong>Schietdag:</strong> $job</li>
+                <li><strong>Opleverdatum:</strong> $deadline</li>
+            </ul>
+            <p>Ik bel u zo snel mogelijk op $phone.</p>
+            <p>Mocht deze informatie niet kloppen, kunt u dit tot 1 week van tevoren aanpassen via <a href='https://uwdomein.nl/about.php'>deze link</a>.</p>
+        ";
+
+        $mail->Body = $mailContent;
+        $mail->AltBody = strip_tags($mailContent); // Voor email clients zonder HTML
 
         $mail->send();
-        echo "✅ Message sent successfully!";
-    } catch (Exception $e) {
-        echo "❌ Error: {$mail->ErrorInfo}";
-    }
-    header("location: reserveren.php?status=verzonden");
 
+    } catch (Exception $e) {
+        // Log eventuele email fouten, maar ga wel door
+        error_log("Email kon niet verzonden worden. Mailer Error: {$mail->ErrorInfo}");
+    }
+
+    // 4. Redirect terug naar de pagina met een succes melding
+    header("location: reserveren.php?status=verzonden");
     exit;
 }
-
 ?>

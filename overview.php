@@ -56,8 +56,8 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">RESERVERINGEN OVERZICHT</h1>
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                Totaal: <?= count($reservations) ?>
-            </span>
+                    Totaal: <?= count($reservations) ?>
+                </span>
         </div>
 
         <div class="overflow-x-auto">
