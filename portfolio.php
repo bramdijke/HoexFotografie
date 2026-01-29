@@ -4,10 +4,7 @@
 require_once "includes/database.php";
 $query = "SELECT * FROM categories";
 $results = mysqli_query($db, $query);
-
-$users = mysqli_fetch_all($results, MYSQLI_ASSOC);
-
-
+$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -73,7 +70,7 @@ $users = mysqli_fetch_all($results, MYSQLI_ASSOC);
                 <?php foreach ($categories as $category) : ?>
                     <div class="portfolio-item min-w-[300px] md:min-w-[400px] snap-center">
                         <a href="categories-klant.php?category_id=<?= $category['category_id']; ?>"
-                            class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
+                           class="block overflow-hidden rounded-lg shadow-md hover:shadow-xl transition">
                             <img src="images/<?= $category['cover']; ?>"
                                  alt="<?= $category['name']; ?>"
                                  class="w-full h-[500px] object-cover hover:scale-105 transition duration-500">

@@ -148,12 +148,10 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </tbody>
             </table>
         </div>
-
-        <div class="mt-6 text-center text-gray-400 text-xs">
-            &copy; <?= date("Y") ?> HOEX Fotografie
-        </div>
     </section>
 </main>
-
+<footer class="text-center py-8 text-gray-400 text-xs uppercase tracking-widest">
+    &copy; <?= date("Y") ?> HOEX Fotografie
+</footer>
 </body>
 </html>
