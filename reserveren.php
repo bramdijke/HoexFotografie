@@ -1,10 +1,9 @@
 <?php
 require_once "includes/database.php";
 
-
 $showForm = true;
 
-//verbergt het formulier na invullen
+// Verbergt het formulier na invullen
 if (isset($_GET['status'])) {
     $status = $_GET['status'];
     if ($status === 'verzonden') {
@@ -12,8 +11,8 @@ if (isset($_GET['status'])) {
     }
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Data veilig maken
     $name = mysqli_real_escape_string($db, $_POST['name']);
     $surname = mysqli_real_escape_string($db, $_POST['surname']);
     $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -23,6 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deadline = mysqli_real_escape_string($db, $_POST['deadline']);
     $info = mysqli_real_escape_string($db, $_POST['task']);
     $customer_type = mysqli_real_escape_string($db, $_POST['option']);
+
+    // --- VALIDATIE: Check of datum in het verleden ligt ---
+    $today = date('Y-m-d');
+    if ($appointment < $today) {
+        echo "<script>alert('Fout: De afspraakdatum kan niet in het verleden liggen.'); window.history.back();</script>";
+        exit;
+    }
+    // -----------------------------------------------------
 
     $query = "INSERT INTO appointments (name, surname, `e-mail`, phone, appointment, job, deadline, info, file, customer_type) 
               VALUES ('$name', '$surname', '$email', '$phone', '$appointment', '$job', '$deadline', '$info', '', '$customer_type')";
@@ -35,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,124 +94,125 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <main class="container mx-auto py-10 px-4">
     <section class="max-w-2xl mx-auto bg-white p-8 rounded shadow-xl border-t-4 border-black">
-        <?php if (!$showForm):?>
+        <?php if (!$showForm): ?>
             <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
                 <h1 class="text-2xl font-black uppercase tracking-tighter text-shadow-grey">De afspraak staat!</h1>
                 <a href="index.php"
-                   class="text-xs font-bold uppercase tracking-widest text-dark-grey hover:text-black transition-colors">
-                    &larr; Terug
-                </a>
+                   class="text-xs font-bold uppercase tracking-widest text-dark-grey hover:text-black transition-colors">&larr;
+                    Terug</a>
             </div>
         <?php else: ?>
             <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
                 <h1 class="text-2xl font-black uppercase tracking-tighter text-black">Maak een Afspraak</h1>
                 <a href="index.php"
-                   class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
-                    &larr; Annuleren
-                </a>
-            </div>
-        <form action="send-email.php" method="POST" enctype="multipart/form-data" class="space-y-6">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="name" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Voornaam</label>
-                    <input type="text" name="name" id="name" placeholder="Bijv. Jan" required
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
-                </div>
-                <div>
-                    <label for="surname"
-                           class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Achternaam</label>
-                    <input type="text" name="surname" id="surname" placeholder="Bijv. Jansen" required
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
-                </div>
+                   class="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors">&larr;
+                    Annuleren</a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="email" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="email@voorbeeld.nl" required
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+            <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Voornaam</label>
+                        <input type="text" name="name" id="name" placeholder="Bijv. Jan" required
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                    </div>
+                    <div>
+                        <label for="surname"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Achternaam</label>
+                        <input type="text" name="surname" id="surname" placeholder="Bijv. Jansen" required
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                    </div>
                 </div>
-                <div>
-                    <label for="phone" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Telefoonnummer</label>
-                    <input type="tel" id="phone" name="phone" placeholder="06 12345678" required
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="appointment"
-
-                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Afspraak
-                           Datum
-</label>
-                    <input type="date" id="appointment" name="appointment" required
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="email"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="email@voorbeeld.nl" required
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                    </div>
+                    <div>
+                        <label for="phone"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Telefoonnummer</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06 12345678" required
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none transition-all">
+                    </div>
                 </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="appointment"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Afspraak
+                            Datum</label>
+                        <input type="date" id="appointment" name="appointment" required
+                               min="<?= date('Y-m-d'); ?>"
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
+                    </div>
+                    <div>
+                        <label for="job"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Opdracht
+                            Datum</label>
+                        <input type="datetime-local" id="job" name="job"
+                               min="<?= date('Y-m-d\TH:i'); ?>"
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
+                    </div>
+                    <div>
+                        <label for="deadline"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Opleverdatum</label>
+                        <input type="datetime-local" id="deadline" name="deadline"
+                               min="<?= date('Y-m-d\TH:i'); ?>"
+                               class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
+                    </div>
+                    <div>
+                        <label for="files"
+                               class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Bestanden</label>
+                        <input type="file" id="files" name="files[]" multiple accept="image/*,.pdf"
+                               class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-gray-100 file:text-black hover:file:bg-gray-200 cursor-pointer">
+                    </div>
+                </div>
+
                 <div>
-                    <label for="job"
-                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2">Opdracht Datum
+                    <label for="task" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Soort
+                        opdracht</label>
+                    <textarea id="task" name="task" rows="4" placeholder="Beschrijf hier de opdracht..." required
+                              class="w-full border resize-none border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none"></textarea>
+                </div>
+
+                <div class="py-2">
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-4">Type
+                        Klant</label>
+                    <div class="flex space-x-6">
+                        <label class="flex items-center cursor-pointer group">
+                            <div class="relative flex items-center justify-center">
+                                <input type="radio" id="zakelijk" name="option" value="zakelijk" class="hidden peer"
+                                       required>
+                                <div class="w-4 h-4 border border-gray-300 rounded-full peer-checked:border-black transition-all"></div>
+                                <div class="absolute w-2 h-2 bg-black rounded-full scale-0 peer-checked:scale-100 transition-transform duration-200"></div>
+                            </div>
+                            <span class="ml-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 peer-checked:text-black transition-colors">Zakelijk</span>
                         </label>
-                    <input type="datetime-local" id="job" name="job"
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
-                </div>
-                <div>
-                    <label for="deadline"
-<<<<<<< Updated upstream
-                           class="block text-[10px] font-bold uppercase tracking-widest text-dark-grey mb-2"> Opleverdatum
+
+                        <label class="flex items-center cursor-pointer group">
+                            <div class="relative flex items-center justify-center">
+                                <input type="radio" id="particulier" name="option" value="particulier"
+                                       class="hidden peer">
+                                <div class="w-4 h-4 border border-gray-300 rounded-full peer-checked:border-black transition-all"></div>
+                                <div class="absolute w-2 h-2 bg-black rounded-full scale-0 peer-checked:scale-100 transition-transform duration-200"></div>
+                            </div>
+                            <span class="ml-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 peer-checked:text-black transition-colors">Particulier</span>
                         </label>
-                    <input type="datetime-local" id="deadline" name="deadline"
-                           class="w-full border border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none">
+                    </div>
                 </div>
-                <div>
-                    <label for="files" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Bestanden</label>
-                    <input type="file" id="files" name="files[]" multiple accept="image/*,.pdf"
-                           class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-gray-100 file:text-black hover:file:bg-gray-200 cursor-pointer">
+
+                <div class="pt-4">
+                    <button type="submit"
+                            class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs shadow-lg transform transition-all duration-300 hover:bg-gray-800">
+                        Afspraak Maken
+                    </button>
                 </div>
-            </div>
-
-            <div>
-                <label for="task" class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Soort
-                    opdracht</label>
-                <textarea id="task" name="task" rows="4" placeholder="Beschrijf hier de opdracht..." required
-                          class="w-full border resize-none border-gray-200 p-3 rounded text-sm focus:ring-1 focus:ring-black focus:border-black outline-none"></textarea>
-            </div>
-
-            <div class="py-2">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-4">Type
-                    Klant</label>
-                <div class="flex space-x-6"><label class="flex items-center cursor-pointer group">
-                        <div class="relative flex items-center justify-center">
-                            <input type="radio" id="zakelijk" name="option" value="zakelijk" class="hidden peer"
-                                   required>
-                            <div class="w-4 h-4 border border-gray-300 rounded-full peer-checked:border-black transition-all"></div>
-                            <div class="absolute w-2 h-2 bg-black rounded-full scale-0 peer-checked:scale-100 transition-transform duration-200"></div>
-                        </div>
-                        <span class="ml-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 peer-checked:text-black transition-colors">Zakelijk</span>
-                    </label>
-
-                    <label class="flex items-center cursor-pointer group">
-                        <div class="relative flex items-center justify-center">
-                            <input type="radio" id="particulier" name="option" value="particulier" class="hidden peer">
-                            <div class="w-4 h-4 border border-gray-300 rounded-full peer-checked:border-black transition-all"></div>
-                            <div class="absolute w-2 h-2 bg-black rounded-full scale-0 peer-checked:scale-100 transition-transform duration-200"></div>
-                        </div>
-                        <span class="ml-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 peer-checked:text-black transition-colors">Particulier</span>
-                    </label>
-
-                </div>
-            </div>
-
-            <div class="pt-4">
-                <button type="submit"
-                        class="w-full bg-black text-white font-bold py-4 rounded uppercase tracking-widest text-xs shadow-lg transform transition-all duration-300 hover:bg-gray-800">
-                    Afspraak Maken
-                </button>
-            </div>
-        </form>
+            </form>
         <?php endif; ?>
-
 
         <footer class="mt-8 text-center text-gray-400 text-[10px] uppercase tracking-widest">
             &copy; <?= date("Y") ?> HOEX Fotografie
