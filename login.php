@@ -32,6 +32,8 @@ if (isset($_POST['submit'])) {
     } else $errors['login'] = 'Wachtwoord en email komen niet overeen.';
 } elseif ($_SESSION['loggedIn'] === true) {
     header('Location: portfolio-bewerken.php');
+} else {
+    $_SESSION['loggedIn'] = false;
 }
 
 ?>

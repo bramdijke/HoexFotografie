@@ -62,14 +62,12 @@
             </div>
 
             <div class="max-w-xl">
-                <p class="text-gray-500 leading-relaxed text-lg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                    nulla
-                    pariatur.
+                <p class="text-gray-500 leading-relaxed text-sm">
+                    Als freelance fotograaf met een basis in Rotterdam en wortels in Den Haag, sta ik sinds 2023 dagelijks met mijn camera in het hart van de actualiteit. <br>
+                    Mijn werk draait om eerlijke visuele verslaglegging; ik wil de kijker niet alleen laten zien wat er gebeurt, maar het verhaal erachter vertellen door middel van krachtige, integere beelden. <br>
+                    Naast mijn werkzaamheden voor het ANP, waar ik uiteenlopende onderwerpen vastleg, van politieke protesten en infrastructurele projecten tot grote culturele evenementen, zoek ik voortdurend naar nieuwe perspectieven. <br>
+                    Projecten zoals "Shot on iPhone" dagen me uit om terug te gaan naar de essentie, waarbij de compositie en het moment belangrijker zijn dan de apparatuur. <br>
+                    Of ik nu een reportage maak bij Tata Steel Chess of de rauwe realiteit van een demonstratie in beeld breng, mijn doel blijft hetzelfde: de werkelijkheid vastleggen zoals die is, zonder opsmuk, maar altijd met oog voor de menselijke maat en de visuele impact.
                 </p>
             </div>
 
