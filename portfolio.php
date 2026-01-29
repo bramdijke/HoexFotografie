@@ -5,7 +5,9 @@ require_once "includes/database.php";
 $query = "SELECT * FROM categories";
 $results = mysqli_query($db, $query);
 
-$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
+$users = mysqli_fetch_all($results, MYSQLI_ASSOC);
+
+
 
 ?>
 <!DOCTYPE html>

@@ -2,90 +2,97 @@
 
 /** @var mysqli $db */
 
-require_once "includes/database.php";
-require_once "includes/image-helper.php";
+session_start();
 
-$showAdd = false;
-$showEdit = false;
-$showDelete = false;
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header("Location: login.php");
+    exit;
+} else {
 
-$query = "SELECT * FROM categories";
-$results = mysqli_query($db, $query);
-$categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
+    require_once "includes/database.php";
+    require_once "includes/image-helper.php";
 
-if (isset($_POST['add'])) {
-    $showAdd = true;
-}
+    $showAdd = false;
+    $showEdit = false;
+    $showDelete = false;
 
-if (isset($_POST['addSubmit'])) {
-    $name = mysqli_escape_string($db, $_POST['name']);
-    $year = mysqli_escape_string($db, $_POST['year']);
+    $query = "SELECT * FROM categories";
+    $results = mysqli_query($db, $query);
+    $categories = mysqli_fetch_all($results, MYSQLI_ASSOC);
 
-    if ($year < 1901 || $year > 2100) {
-        //echo "Jaartal moet tussen 1901 en 2100";
-    } else {
-        $cover = addImageFile($_FILES['cover']);
+    if (isset($_POST['add'])) {
+        $showAdd = true;
+    }
 
-        $query = "INSERT INTO categories (name, year, cover) VALUES ('$name', '$year', '$cover')";
-        $result = mysqli_query($db, $query);
+    if (isset($_POST['addSubmit'])) {
+        $name = mysqli_escape_string($db, $_POST['name']);
+        $year = mysqli_escape_string($db, $_POST['year']);
+
+        if ($year < 1901 || $year > 2100) {
+            //echo "Jaartal moet tussen 1901 en 2100";
+        } else {
+            $cover = addImageFile($_FILES['cover']);
+
+            $query = "INSERT INTO categories (name, year, cover) VALUES ('$name', '$year', '$cover')";
+            $result = mysqli_query($db, $query);
+
+            mysqli_close($db);
+
+            header("location: portfolio-bewerken.php");
+
+            exit;
+        }
+
+    }
+    if (isset($_POST['edit'])) {
+        $showEdit = true;
+    }
+    if (isset($_POST['editSubmit'])) {
+
+        $categorie_id = $_POST['category_id'];
+
+        if (isset($_FILES['newCover']) && $_FILES['newCover']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $newCover = addImageFile($_FILES['newCover']);
+
+            if ($newCover) {
+                $cover = $_POST['oldCover'];
+
+                if (file_exists("images/$cover")) {
+                    unlink("images/$cover");
+                }
+                $newCoverEscaped = mysqli_escape_string($db, $newCover);
+
+                $query = "UPDATE `categories` SET `cover` = '$newCoverEscaped' WHERE `category_id` = $categorie_id";
+                mysqli_query($db, $query);
+
+
+            }
+        }
+
+        mysqli_close($db);
+        header("Location: portfolio-bewerken.php");
+        exit;
+    }
+
+    if (isset($_POST['delete'])) {
+        $cover = $_POST['cover'];
+
+        if (file_exists("images/$cover")) {
+            unlink("images/$cover");
+        }
+
+        $categorie_id = mysqli_escape_string($db, $_POST['category_id']);
+
+        $query = "DELETE FROM categories WHERE category_id = '$category_id'";
+        mysqli_query($db, $query);
 
         mysqli_close($db);
 
-        header("location: portfolio-bewerken.php");
-
+        header("Location: portfolio-bewerken.php");
         exit;
-        }
-
-}
-if (isset($_POST['edit'])) {
-    $showEdit = true;
-}
-if (isset($_POST['editSubmit'])) {
-
-    $categorie_id = $_POST['category_id'];
-
-    if (isset($_FILES['newCover']) && $_FILES['newCover']['error'] !== UPLOAD_ERR_NO_FILE) {
-        $newCover = addImageFile($_FILES['newCover']);
-
-        if ($newCover) {
-            $cover = $_POST['oldCover'];
-
-            if (file_exists("images/$cover")) {
-                unlink("images/$cover");
-            }
-            $newCoverEscaped = mysqli_escape_string($db, $newCover);
-
-            $query = "UPDATE `categories` SET `cover` = '$newCoverEscaped' WHERE `category_id` = $categorie_id";
-            mysqli_query($db, $query);
-
-
-        }
     }
 
-    mysqli_close($db);
-    header("Location: portfolio-bewerken.php");
-    exit;
 }
-
-if (isset($_POST['delete'])) {
-    $cover = $_POST['cover'];
-
-    if (file_exists("images/$cover")) {
-        unlink("images/$cover");
-    }
-
-    $categorie_id = mysqli_escape_string($db, $_POST['category_id']);
-
-    $query = "DELETE FROM categories WHERE category_id = '$category_id'";
-    mysqli_query($db, $query);
-
-    mysqli_close($db);
-
-    header("Location: portfolio-bewerken.php");
-    exit;
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
