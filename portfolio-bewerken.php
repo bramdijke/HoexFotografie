@@ -1,15 +1,13 @@
 <?php
-
-/** @var mysqli $db */
-
 session_start();
 
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header("Location: login.php");
     exit;
-} else {
+}
+/** @var mysqli $db */
 
-    require_once "includes/database.php";
+require_once "includes/database.php";
     require_once "includes/image-helper.php";
 
     $showAdd = false;
@@ -91,8 +89,6 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
         header("Location: portfolio-bewerken.php");
         exit;
     }
-
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

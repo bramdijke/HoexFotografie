@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+
 require_once "includes/database.php";
 
 $query = "SELECT * FROM appointments";
@@ -21,7 +28,7 @@ $reservations = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-2 flex flex-col md:grid md:grid-cols-3 items-center gap-4 md:gap-0">
         <ul class="flex items-center space-x-6 md:space-x-8 order-2 md:order-1">
-            <li><a href="portfolio.php"
+            <li><a href="portfolio-bewerken.php"
                    class="text-xs md:text-sm uppercase tracking-widest font-medium hover:text-gray-500 transition">Portfolio
                     bewerken</a>
             </li>

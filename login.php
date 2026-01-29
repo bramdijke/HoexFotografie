@@ -1,4 +1,5 @@
 <?php
+session_start();
 /** @var mysqli $db */
 
 $errors = [];
@@ -10,7 +11,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM `users` WHERE `user` LIKE '$email'";
+    $query = "SELECT * FROM `users` WHERE `user` = '$email'";
     $result = mysqli_query($db, $query);
 
     if ($result && mysqli_num_rows($result) === 1) {
@@ -18,14 +19,19 @@ if (isset($_POST['submit'])) {
 
         if (password_verify($password, $row['password'])) {
             mysqli_close($db);
-            session_start();
 
+            session_start();
+            session_regenerate_id(true);
             $_SESSION['loggedIn'] = true;
-            $showForm = false;
+
+            header('Location: portfolio-bewerken.php');
+            exit;
         } else {
             $errors['login'] = 'Wachtwoord en email komen niet overeen.';
         }
-    } $errors['login'] = 'Wachtwoord en email komen niet overeen.';
+    } else $errors['login'] = 'Wachtwoord en email komen niet overeen.';
+} elseif ($_SESSION['loggedIn'] === true) {
+    header('Location: portfolio-bewerken.php');
 }
 
 ?>
@@ -58,7 +64,7 @@ if (isset($_POST['submit'])) {
 
             <button type="submit" name="submit">Login</button>
         </form>
-    <form action="login.php" method=""
+
     <?php else: ?>
     <h1>Inlog Succesvol</h1>
     <h1><a href="overview.php">Reserveringen</a></h1>
